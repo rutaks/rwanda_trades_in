@@ -8,7 +8,7 @@ import { connectDB, setupSession } from "./config/db";
 import logger from "morgan";
 import session from "express-session";
 import path from "path";
-import flashMessages from "connect-flash";
+import flash from "express-flash";
 import routes from "./routes/index.route";
 import AuthMocks from "./mocks/auth-mocks";
 import { debug } from "winston";
@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../public")));
-app.use(flashMessages());
+app.use(flash());
 app.use(
   session({
     secret: secret,
