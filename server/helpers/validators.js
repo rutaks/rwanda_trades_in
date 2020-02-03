@@ -17,26 +17,14 @@ class Validator {
     return accountSchema.validate({ email, password });
   }
 
-  static user(user) {
-    let userSchema = Joi.object({
-      firstname: Joi.string().required(),
-      lastname: Joi.string().required(),
-      email: Joi.string().email({
-        minDomainSegments: 2,
-        tlds: { allow: ["com", "rw", "fr"] }
-      }),
-      dob: Joi.date()
-        .greater("1-1-1974")
-        .allow(""),
-      gender: Joi.string()
-        .valid("MALE", "FEMALE")
-        .uppercase()
-        .required(),
-      password: Joi.string()
-        .regex(/^[a-zA-Z0-9]{3,30}$/)
-        .required()
+  static category(category) {
+    let categorySchema = Joi.object({
+      name: Joi.string().required(),
+      status: Joi.string()
+        .valid("active", "inactive")
+        .allow("")
     });
-    return userSchema.validate(user);
+    return categorySchema.validate(category);
   }
 }
 
