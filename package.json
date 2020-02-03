@@ -41,6 +41,7 @@
     "custom-env": "^1.0.2",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
+    "express-flash": "0.0.2",
     "express-pino-logger": "^4.0.0",
     "express-response-handler": "^1.4.1",
     "express-session": "^1.17.0",
