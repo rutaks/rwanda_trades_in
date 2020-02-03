@@ -1,0 +1,74 @@
+<%- include('../../includes/header.ejs') %>
+<%- include('../../includes/navbar.ejs') %>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Categories</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">View All Categories</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <%if(messages.success){%>
+                        <div class="alert alert-success alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Success:</strong> <%- messages.success %>
+                        </div>
+                        <%}%>
+                        <a href="/admin/categories/new" class="btn btn-primary btn-block">Add A Category</a>
+                        <br>
+                        <h1 class="card-title">All Categories</h1>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th> # </th>
+                                    <th> Category Name </th>
+                                    <th> Status </th>
+                                    <th> Created On </th>
+                                    <th> No. Items </th>
+                                    <th> Operations </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <% for(let category of categories){  %>
+                        <tr>
+                            <td> 1 </td>
+                            <td> <%= category.name%> </td>
+                            <td>
+                                <div class="progress">
+                                    <% if(category.status == true){ %>
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <% } %>
+                                    <% if(category.status == false){ %>
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <%}%>
+                                </div>
+                            </td>
+                            <td> <%= category.createdOn.toDateString() %>
+                            </td>
+                            <td> - </td>
+                            <td>
+                                <a class="btn btn-warning" href="/admin/categories/modify/<%=category._id%>">
+                                    <i class="mdi mdi-book-open-page-variant"></i>
+                                </a>
+                                <a class="btn btn-danger" href="/admin/categories/remove/<%=category._id%>">
+                                    <i class="mdi mdi-block-helper"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <% } %>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../../includes/footer.ejs') %>
