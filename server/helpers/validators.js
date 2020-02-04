@@ -26,6 +26,18 @@ class Validator {
     });
     return categorySchema.validate(category);
   }
+
+  static product(product) {
+    let productSchema = Joi.object({
+      name: Joi.string().required(),
+      currency: Joi.string()
+        .valid("USD", "UAE", "RWF")
+        .required(),
+      description: Joi.string().required(),
+      category: Joi.string().required()
+    });
+    return productSchema.validate(product);
+  }
 }
 
 export default Validator;
