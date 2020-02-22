@@ -14,6 +14,7 @@ class CategoryClass {
         "add-category"
       );
     }
+    // eslint-disable-next-line no-useless-catch
     try {
       const foundCategory = await Category.find({ name: name });
       if (foundCategory.length > 0) {
@@ -24,7 +25,9 @@ class CategoryClass {
           "add-category"
         );
       }
-      const category = new Category({ name: name });
+      const category = new Category({
+        name: name
+      });
       category.save();
       req.flash("success", "Category Created");
       return res.redirect("/admin/categories");
@@ -46,6 +49,7 @@ class CategoryClass {
         "modify-category"
       );
     }
+    // eslint-disable-next-line no-useless-catch
     try {
       let foundCategory = await Category.findById(categoryId);
       if (!foundCategory) {
@@ -67,6 +71,7 @@ class CategoryClass {
   }
   static async removeCategory(req, res) {
     const { categoryId } = req.params;
+    // eslint-disable-next-line no-useless-catch
     try {
       let foundCategory = await Category.findById(categoryId);
       if (!foundCategory) {
@@ -82,6 +87,7 @@ class CategoryClass {
   }
 
   static async getAllCategories(req, res) {
+    // eslint-disable-next-line no-useless-catch
     try {
       const categories = await Category.find();
       res.render("server/partials/categories/view-all-categories", {
@@ -97,6 +103,7 @@ class CategoryClass {
   }
 
   static async getModifyCategoryPage(req, res) {
+    // eslint-disable-next-line no-useless-catch
     try {
       const { categoryId } = req.params;
       const foundCategory = await Category.findById(categoryId);
