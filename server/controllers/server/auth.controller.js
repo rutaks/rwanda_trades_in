@@ -1,7 +1,7 @@
 // import Admin from "../models/admin.model";
-import Account from "../models/account.model";
-import auth from "../helpers/auth";
-import validate from "../helpers/validators";
+import Account from "../../models/account.model";
+import auth from "../../helpers/auth";
+import validate from "../../helpers/validators";
 
 /** Class Holding All User Authentication methods */
 class AuthController {
