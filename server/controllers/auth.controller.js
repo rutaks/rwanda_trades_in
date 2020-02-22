@@ -1,7 +1,8 @@
-import Admin from "../models/admin.model";
+// import Admin from "../models/admin.model";
 import Account from "../models/account.model";
 import auth from "../helpers/auth";
 import validate from "../helpers/validators";
+
 /** Class Holding All User Authentication methods */
 class AuthController {
   static getDashboard(req, res) {
@@ -10,21 +11,22 @@ class AuthController {
   static async getLoginPage(req, res) {
     res.status(201).render("server/login");
   }
-  static async signup(req, res) {
-    //TODO: ADD PROPER SIGNUP
-    const { error, value } = validate.user(req.body);
-  }
+
+  // static async signup(req, res) {
+  //   //TODO: ADD PROPER SIGNUP
+  //   // const { error, value } = validate.user(req.body);
+  // }
 
   static async login(req, res) {
     const { email, password } = req.body;
     const { value, error } = validate.account(email, password);
 
     if (error) return sendErrorMessage(res, error.details[0].message, value);
-
+    // eslint-disable-next-line no-useless-catch
     try {
-      const foundAccount = await Account.findOne({ username: email }).populate(
-        "owner"
-      );
+      const foundAccount = await Account.findOne({
+        username: email
+      }).populate("owner");
       if (!foundAccount) {
         return sendErrorMessage(res, "", value);
       }
