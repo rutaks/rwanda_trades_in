@@ -1,8 +1,8 @@
-import Product from "../models/product.model";
-import Category from "../models/category.model";
-import validate from "../helpers/validators";
-import FileUtil from "../helpers/fileUtil";
-import Validator from "../helpers/validators";
+import Product from "../../models/product.model";
+import Category from "../../models/category.model";
+import validate from "../../helpers/validators";
+import FileUtil from "../../helpers/fileUtil";
+import Validator from "../../helpers/validators";
 
 const baseUrl = "server/partials/products";
 class productController {

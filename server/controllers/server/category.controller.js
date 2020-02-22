@@ -1,5 +1,5 @@
-import Category from "../models/category.model";
-import validate from "../helpers/validators";
+import Category from "../../models/category.model";
+import validate from "../../helpers/validators";
 
 class CategoryClass {
   static async addCategory(req, res) {
