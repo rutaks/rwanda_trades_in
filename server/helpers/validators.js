@@ -1,6 +1,11 @@
 import Joi from "@hapi/joi";
 
 class Validator {
+  static isValidPicture(file) {
+    if (typeof file === "undefined") return false;
+    return /\.(gif|jpg|jpeg|tiff|png)$/i.test(file[0].path);
+  }
+
   static account(email, password) {
     let accountSchema = Joi.object({
       email: Joi.string()
@@ -30,6 +35,7 @@ class Validator {
   static product(product) {
     let productSchema = Joi.object({
       name: Joi.string().required(),
+      price: Joi.number().required(),
       currency: Joi.string()
         .valid("USD", "UAE", "RWF")
         .required(),
