@@ -3,14 +3,13 @@ import express from "express";
 import env from "custom-env";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import Response from "./helpers/response";
 import { connectDB, setupSession } from "./config/db";
 import logger from "morgan";
 import session from "express-session";
 import path from "path";
-import flashMessages from "connect-flash";
-import ErrorHandler from "./helpers/error-handler";
-
+import flash from "express-flash";
+import routes from "./routes/index.route";
+import AuthMocks from "./mocks/auth-mocks";
 env.env();
 
 /** Variable Definitions */
@@ -25,7 +24,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../public")));
-app.use(flashMessages());
+app.use("/uploads", express.static("uploads"));
+app.use(flash());
 app.use(
   session({
     secret: secret,
@@ -55,16 +55,16 @@ app.get("/intro", (req, res) => res.render("server/index"));
 
 /**
  * Route serving API Routes
- * @name /api/v1
+ * @name /
  * @function
  * @param {string} path - Express path
  */
-// app.use("/api/v1", api);
+app.use("/", routes);
 
 /** Error Handling */
 const handleError = (err, res) => {
   const { statusCode, message } = err;
-  return res.render("auth/message-window", {
+  return res.render("server/message-window", {
     title: statusCode,
     heading: `Oh No, ${statusCode}. Something Has Happened`,
     message: message
@@ -79,6 +79,9 @@ app.use((err, req, res, next) => {
 const runServer = async () => {
   try {
     await connectDB();
+    const check = AuthMocks.setupAdmin();
+    const message = check ? "Mocks Are Set" : "Mocks Are Not Set";
+    console.debug("INFO:", message);
     app.listen(port, () =>
       console.debug("INFO:", `RwandaTradesIn is now running on Port: ${port}`)
     );
