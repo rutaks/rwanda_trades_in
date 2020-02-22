@@ -1,6 +1,6 @@
 import Router from "express";
-import upload from "../middlewares/upload-product-images";
-import productController from "../controllers/product.controller";
+import upload from "../../middlewares/upload-product-images";
+import productController from "../../controllers/server/product.controller";
 
 const router = Router();
 
