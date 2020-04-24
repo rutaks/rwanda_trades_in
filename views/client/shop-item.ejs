@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Fashi Template">
+    <meta name="keywords" content="Fashi, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RwandaTradesIn</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/client/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/client/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/client/css/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="/client/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/client/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/client/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/client/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/client/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/client/css/style.css" type="text/css">
+
+    <!-- PRODUCT ITEM SAMPLE -->
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="/client/product_item/css/animate.css">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="/client/product_item/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/client/product_item/css/lightslider.min.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="/client/product_item/css/all.css">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="/client/product_item/css/flaticon.css">
+    <link rel="stylesheet" href="/client/product_item/css/themify-icons.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="/client/product_item/css/magnific-popup.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="/client/product_item/css/style.css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="header-top">
+            <div class="container">
+                <div class="ht-left">
+                    <div class="mail-service">
+                        <i class=" fa fa-envelope"></i>
+                        help.desk@rwandatradesin.com
+                    </div>
+                    <div class="phone-service">
+                        <i class=" fa fa-phone"></i>
+                        +250 780 000 000
+                    </div>
+                </div>
+                <div class="ht-right">
+                    <div class="top-social">
+                        <a href="#"><i class="ti-facebook"></i></a>
+                        <a href="#"><i class="ti-twitter-alt"></i></a>
+                        <a href="#"><i class="ti-linkedin"></i></a>
+                        <a href="#"><i class="ti-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="inner-header">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="logo">
+                            <a href="./index.html">
+                                <img src="/client/img/logo.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-5">
+                        <div class="advanced-search">
+                            <span class="category-btn">Search</span>
+                            <div class="input-group">
+                                <input type="text" placeholder="What do you need?">
+                                <button type="button"><i class="ti-search"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3 text-right col-md-3">
+                        <ul class="nav-right">
+                            <span>.</span>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-item">
+            <div class="container">
+                <div class="nav-depart">
+                    <div class="depart-btn">
+                        <i class="ti-menu"></i>
+                        <span>All departments</span>
+                        <ul class="depart-hover">
+                            <% for(let category of categories){  %>
+                            <li><a href="/categories/<%=category._id%>"><%=category.name%></a></li>
+                            <% } %>
+                            <!-- <li class="active"><a href="#">Women’s Clothing</a></li>
+                            <li><a href="#">Men’s Clothing</a></li>
+                            <li><a href="#">Underwear</a></li>
+                            <li><a href="#">Kid's Clothing</a></li>
+                            <li><a href="#">Brand Fashion</a></li>
+                            <li><a href="#">Accessories/Shoes</a></li>
+                            <li><a href="#">Luxury Brands</a></li>
+                            <li><a href="#">Brand Outdoor Apparel</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                <nav class="nav-menu mobile-menu">
+                    <ul>
+                        <li class="active"><a href="/">Home</a></li>
+
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div id="mobile-menu-wrap"></div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+    <!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <a href="#"><i class="fa fa-home"></i> Home</a>
+                        <span>Shop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section Begin -->
+
+    <!--================Single Product Area =================-->
+    <div class="product_image_area section_padding">
+        <div class="container">
+            <div class="row s_product_inner">
+                <div class="col-lg-5">
+                    <div class="product_slider_img">
+                        <div id="vertical">
+                            <div data-thumb="/client/img/product_details/prodect_details_1.png">
+                                <img src="/client/img/product_details/prodect_details_1.png" />
+                            </div>
+                            <div data-thumb="/client/img/product_details/prodect_details_2.png">
+                                <img src="/client/img/product_details/prodect_details_2.png" />
+                            </div>
+                            <div data-thumb="/client/img/product_details/prodect_details_3.png">
+                                <img src="/client/img/product_details/prodect_details_3.png" />
+                            </div>
+                            <div data-thumb="/client/img/product_details/prodect_details_4.png">
+                                <img src="/client/img/product_details/prodect_details_4.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="s_product_text">
+                        <h3>Faded SkyBlu Denim Jeans</h3>
+                        <h2>$149.99</h2>
+                        <ul class="list">
+                            <li>
+                                <a class="active" href="#">
+                                    <span>Category</span> : Household</a>
+                            </li>
+                            <li>
+                                <a href="#"> <span>Availibility</span> : In Stock</a>
+                            </li>
+                        </ul>
+                        <p>
+                            Mill Oil is an innovative oil filled radiator with the most modern technology. If you are
+                            looking for something that can make your interior look awesome, and at the same time.
+                        </p>
+                        <div class="card_area">
+                            <div class="product_count d-inline-block">
+                                <span class="inumber-decrement"> <i class="ti-minus"></i></span>
+                                <input class="input-number" type="text" value="1" min="0" max="10">
+                                <span class="number-increment"> <i class="ti-plus"></i></span>
+                            </div>
+                            <div class="add_to_cart">
+                                <a href="#" class="btn_3">add to cart</a>
+                                <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
+                            </div>
+                            <div class="social_icon">
+                                <a href="#" class="fb"><i class="ti-facebook"></i></a>
+                                <a href="#" class="tw"><i class="ti-twitter-alt"></i></a>
+                                <a href="#" class="li"><i class="ti-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================End Single Product Area =================-->
+
+
+    <!-- product_list part start-->
+    <section class="product_list best_seller padding_bottom">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="section_tittle text-center">
+                        <h2>Best Sellers</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_category_product">
+                        <div class="single_category_img">
+                            <img src="/client/img/product_details/prodect_details_2.png" alt="">
+                            <div class="category_social_icon">
+                                <ul>
+                                    <li><a href="#"><i class="ti-heart"></i></a></li>
+                                    <li><a href="#"><i class="ti-bag"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="category_product_text">
+                                <a href="single-product.html">
+                                    <h5>Long Sleeve TShirt</h5>
+                                </a>
+                                <p>$150.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_category_product">
+                        <div class="single_category_img">
+                            <img src="/client/img/product_details/prodect_details_2.png" alt="">
+                            <div class="category_social_icon">
+                                <ul>
+                                    <li><a href="#"><i class="ti-heart"></i></a></li>
+                                    <li><a href="#"><i class="ti-bag"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="category_product_text">
+                                <a href="single-product.html">
+                                    <h5>Long Sleeve TShirt</h5>
+                                </a>
+                                <p>$150.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_category_product">
+                        <div class="single_category_img">
+                            <img src="/client/img/product_details/prodect_details_2.png" alt="">
+                            <div class="category_social_icon">
+                                <ul>
+                                    <li><a href="#"><i class="ti-heart"></i></a></li>
+                                    <li><a href="#"><i class="ti-bag"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="category_product_text">
+                                <a href="single-product.html">
+                                    <h5>Long Sleeve TShirt</h5>
+                                </a>
+                                <p>$150.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_category_product">
+                        <div class="single_category_img">
+                            <img src="/client/img/product_details/prodect_details_2.png" alt="">
+                            <div class="category_social_icon">
+                                <ul>
+                                    <li><a href="#"><i class="ti-heart"></i></a></li>
+                                    <li><a href="#"><i class="ti-bag"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="category_product_text">
+                                <a href="single-product.html">
+                                    <h5>Long Sleeve TShirt</h5>
+                                </a>
+                                <p>$150.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- product_list part end-->
+
+    <!-- Product Shop Section Begin -->
+    <section class="product-shop spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+
+                </div>
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <div class="product-show-option">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+
+                            </div>
+                            <div class="col-lg-5 col-md-5 text-right">
+                                <p>Page 1 Of 12 Product</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-list">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                    <!-- PAGINATION -->
+                    <center>
+
+                    </center>
+                    <!-- <div class="loading-more">
+                    <i class="icon_loading"></i>
+                    <a href="#">
+                        Loading More
+                    </a>
+                </div> -->
+                    <!-- </div> -->
+                </div>
+            </div>
+    </section>
+    <!-- jquery plugins here-->
+    <script src="/client/product_item/js/jquery-1.12.1.min.js"></script>
+    <!-- popper js -->
+    <script src="/client/product_item/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="/client/product_item/js/bootstrap.min.js"></script>
+    <!-- easing js -->
+    <script src="/client/product_item/js/jquery.magnific-popup.js"></script>
+    <!-- swiper js -->
+    <script src="/client/product_item/js/lightslider.min.js"></script>
+    <!-- swiper js -->
+    <script src="/client/product_item/js/mixitup.min.js"></script>
+    <script src="/client/product_item/js/lightslider.min.js"></script>
+    <!-- particles js -->
+    <script src="/client/product_item/js/owl.carousel.min.js"></script>
+    <script src="/client/product_item/js/jquery.nice-select.min.js"></script>
+    <!-- slick js -->
+    <script src="/client/product_item/js/slick.min.js"></script>
+    <script src="/client/product_item/js/jquery.counterup.min.js"></script>
+    <script src="/client/product_item/js/waypoints.min.js"></script>
+    <script src="/client/product_item/js/contact.js"></script>
+    <script src="/client/product_item/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/client/product_item/js/jquery.form.js"></script>
+    <script src="/client/product_item/js/jquery.validate.min.js"></script>
+    <script src="/client/product_item/js/mail-script.js"></script>
+    <!-- custom js -->
+    <script src="/client/product_item/js/custom.js"></script>
+    <!-- Product Shop Section End -->
+    <%- include('./includes/footer.ejs') %>

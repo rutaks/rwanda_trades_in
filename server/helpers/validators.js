@@ -8,15 +8,14 @@ class Validator {
 
   static account(email, password) {
     let accountSchema = Joi.object({
-      email: Joi.string()
-        .email()
-        .required(),
+      email: Joi.string().email().required(),
       password: Joi.string()
-        .regex(/^[a-zA-Z0-9]{3,30}$/)
-        .required()
-        .messages({
-          string: `Invalid Password Format`
-        })
+        .regex(
+          new RegExp(
+            "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+          )
+        )
+        .error(new Error("Password is not valid")),
     });
 
     return accountSchema.validate({ email, password });
@@ -25,9 +24,7 @@ class Validator {
   static category(category) {
     let categorySchema = Joi.object({
       name: Joi.string().required(),
-      status: Joi.string()
-        .valid("active", "inactive")
-        .allow("")
+      status: Joi.string().valid("active", "inactive").allow(""),
     });
     return categorySchema.validate(category);
   }
@@ -36,11 +33,9 @@ class Validator {
     let productSchema = Joi.object({
       name: Joi.string().required(),
       price: Joi.number().required(),
-      currency: Joi.string()
-        .valid("USD", "UAE", "RWF")
-        .required(),
+      currency: Joi.string().valid("USD", "UAE", "RWF").required(),
       description: Joi.string().required(),
-      category: Joi.string().required()
+      category: Joi.string().required(),
     });
     return productSchema.validate(product);
   }

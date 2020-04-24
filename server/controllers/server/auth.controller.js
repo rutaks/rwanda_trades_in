@@ -21,11 +21,16 @@ class AuthController {
     const { email, password } = req.body;
     const { value, error } = validate.account(email, password);
 
-    if (error) return sendErrorMessage(res, error.details[0].message, value);
+    if (error) {
+      if (error.details)
+        return sendErrorMessage(res, error.details[0].message, value);
+      else return sendErrorMessage(res, error.message, value);
+    }
+
     // eslint-disable-next-line no-useless-catch
     try {
       const foundAccount = await Account.findOne({
-        username: email
+        username: email,
       }).populate("owner");
       if (!foundAccount) {
         return sendErrorMessage(res, "", value);
@@ -50,7 +55,7 @@ const sendErrorMessage = (res, message, fields) => {
   if (message.length < 1) message = "Invalid Username Or Password";
   return res.render("server/login", {
     previousInput: fields,
-    error: message
+    error: message,
   });
 };
 

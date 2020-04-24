@@ -31,21 +31,27 @@
         <div class="container">
             <div class="inner-header">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3">
+                    <div class="col-lg-4 col-md-4">
                         <div class="logo">
                             <a href="./index.html">
                                 <img src="/client/img/logo.png" alt="">
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-7 col-md-7">
+                    <div class="col-lg-5 col-md-5">
                         <div class="advanced-search">
-                            <button type="button" class="category-btn">All Categories</button>
+                            <span class="category-btn">Search</span>
                             <div class="input-group">
                                 <input type="text" placeholder="What do you need?">
                                 <button type="button"><i class="ti-search"></i></button>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="col-lg-3 text-right col-md-3">
+                        <ul class="nav-right">
+                            <span>.</span>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -57,28 +63,24 @@
                         <i class="ti-menu"></i>
                         <span>All departments</span>
                         <ul class="depart-hover">
-                            <li class="active"><a href="#">Women’s Clothing</a></li>
+                            <% for(let category of categories){  %>
+                            <li><a href="/categories/<%=category._id%>"><%=category.name%></a></li>
+                            <% } %>
+                            <!-- <li class="active"><a href="#">Women’s Clothing</a></li>
                             <li><a href="#">Men’s Clothing</a></li>
                             <li><a href="#">Underwear</a></li>
                             <li><a href="#">Kid's Clothing</a></li>
                             <li><a href="#">Brand Fashion</a></li>
                             <li><a href="#">Accessories/Shoes</a></li>
                             <li><a href="#">Luxury Brands</a></li>
-                            <li><a href="#">Brand Outdoor Apparel</a></li>
+                            <li><a href="#">Brand Outdoor Apparel</a></li> -->
                         </ul>
                     </div>
                 </div>
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./index.html">Home</a></li>
-                        <li><a href="./shop.html">Shop</a></li>
-                        <li><a href="#">Collection</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Men's</a></li>
-                                <li><a href="#">Women's</a></li>
-                                <li><a href="#">Kid's</a></li>
-                            </ul>
-                        </li>
+                        <li class="active"><a href="/">Home</a></li>
+
                         <li><a href="./contact.html">Contact</a></li>
                     </ul>
                 </nav>

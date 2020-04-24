@@ -6,21 +6,21 @@ class AuthMocks {
   static async setupAdmin() {
     try {
       const foundAdmin = await Admin.findOne({
-        email: "rootsum.dev@gmail.com"
+        email: "rootsum.dev@gmail.com",
       });
       if (foundAdmin) return true;
       let admin = new Admin({
         firstname: "John",
         lastname: "Doe",
         email: "rootsum.dev@gmail.com",
-        gender: "Male"
+        gender: "Male",
       });
       await admin.save();
-      let hashPassword = auth.hashPassword("password");
+      let hashPassword = auth.hashPassword("Password123!@#");
       let account = new Account({
         username: "rootsum.dev@gmail.com",
         password: hashPassword,
-        owner: admin._id
+        owner: admin._id,
       });
       await account.save();
       return true;
