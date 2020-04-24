@@ -144,65 +144,131 @@
             </div>
         </div>
     </div>
-    <!-- Breadcrumb Section Begin -->
+    <!-- Breadcrumb Section End -->
+
 
     <!--================Single Product Area =================-->
     <div class="product_image_area section_padding">
         <div class="container">
+            <%if(messages.success){%>
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success:</strong> <%- messages.success %>
+            </div>
+            <%} else if(messages.error){%>
+            <div class="alert alert-error alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Oops:</strong> <%- messages.error %>
+            </div>
+            <%}%>
             <div class="row s_product_inner">
                 <div class="col-lg-5">
                     <div class="product_slider_img">
                         <div id="vertical">
                             <div data-thumb="<%= foundProduct.mainPicture %>">
-                                <img src="<%= foundProduct.mainPicture %>" />
+            <img src="<%= foundProduct.mainPicture %>" />
+        </div>
+        <div data-thumb="<%= foundProduct.secondPicture %>">
+            <img src="<%= foundProduct.secondPicture %>" />
+        </div>
+        <div data-thumb="<%= foundProduct.thirdPicture %>">
+            <img src="<%= foundProduct.thirdPicture %>" />
+        </div>
+        <div data-thumb="<%= foundProduct.fourthPicture %>">
+            <img src="<%= foundProduct.fourthPicture %>" />
+        </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-5 offset-lg-1">
+        <div class="s_product_text">
+            <h3><%= foundProduct.name %></h3>
+            <h2><%= foundProduct.currency %> <%= foundProduct.price %>.00</h2>
+            <ul class="list">
+                <li>
+                    <a class="active" href="/categories/<%= foundProduct.category._id %>">
+                        <span>Category</span> : <%= foundProduct.category.name %>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"> <span>Availibility</span> : In Stock</a>
+                </li>
+            </ul>
+            <p><%= foundProduct.description %></p>
+            <div class="card_area">
+                <div class="product_count d-inline-block">
+                    <span class="inumber-decrement"> <i class="ti-minus"></i></span>
+                    <input class="input-number" type="text" value="1" min="0" max="10">
+                    <span class="number-increment"> <i class="ti-plus"></i></span>
+                </div>
+                <!-- Button trigger modal -->
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Request For A
+                                    <%= foundProduct.name %></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div data-thumb="<%= foundProduct.secondPicture %>">
-                                <img src="<%= foundProduct.secondPicture %>" />
-                            </div>
-                            <div data-thumb="<%= foundProduct.thirdPicture %>">
-                                <img src="<%= foundProduct.thirdPicture %>" />
-                            </div>
-                            <div data-thumb="<%= foundProduct.fourthPicture %>">
-                                <img src="<%= foundProduct.fourthPicture %>" />
-                            </div>
+                            <form method="POST" action="/product-requests/<%= foundProduct._id %>">
+                                <div class="modal-body">
+                                    <h6>Kindly Fill In Your Details & We'll get back to you as soon as
+                                        possible
+                                    </h6>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="client-names">Your Full Names</label>
+                                        <input type="name" name="clientNames" class="form-control" id="client-names"
+                                            placeholder="i.e: John Doe">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="client-phone-number">Your Phone Number</label>
+                                                <input type="number" name="phoneNumber" class="form-control"
+                                                    id="client-phone-number" placeholder="i.e: +250 780 000 000">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="client-email">Your email address</label>
+                                                <input type="email" name="email" class="form-control" id="client-email"
+                                                    placeholder="i.e: john.doe@gmail.com">
+                                            </div>
+                                            <input type="hidden" name="quantity" id="input" class="form-control"
+                                                value="1">
+                                            <input type="hidden" name="product" id="input" class="form-control"
+                                                value="<%= foundProduct._id %>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn_3">Place Request</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 offset-lg-1">
-                    <div class="s_product_text">
-                        <h3><%= foundProduct.name %></h3>
-                        <h2><%= foundProduct.currency %> <%= foundProduct.price %>.00</h2>
-                        <ul class="list">
-                            <li>
-                                <a class="active" href="/categories/<%= foundProduct.category._id %>">
-                                    <span>Category</span> : <%= foundProduct.category.name %>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#"> <span>Availibility</span> : In Stock</a>
-                            </li>
-                        </ul>
-                        <p><%= foundProduct.description %></p>
-                        <div class="card_area">
-                            <div class="product_count d-inline-block">
-                                <span class="inumber-decrement"> <i class="ti-minus"></i></span>
-                                <input class="input-number" type="text" value="1" min="0" max="10">
-                                <span class="number-increment"> <i class="ti-plus"></i></span>
-                            </div>
-                            <div class="add_to_cart">
-                                <a href="#" class="btn_3">Place Request</a>
-                                <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
-                            </div>
-                            <div class="social_icon">
-                                <a href="#" class="fb"><i class="ti-facebook"></i></a>
-                                <a href="#" class="tw"><i class="ti-twitter-alt"></i></a>
-                                <a href="#" class="li"><i class="ti-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="add_to_cart">
+                    <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn_3">Place
+                        Request</a>
+                    <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
+                </div>
+                <div class="social_icon">
+                    <a href="#" class="fb"><i class="ti-facebook"></i></a>
+                    <a href="#" class="tw"><i class="ti-twitter-alt"></i></a>
+                    <a href="#" class="li"><i class="ti-linkedin"></i></a>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
+    </div>
     </div>
     <!--================End Single Product Area =================-->
 

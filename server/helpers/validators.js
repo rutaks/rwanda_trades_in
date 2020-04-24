@@ -39,6 +39,18 @@ class Validator {
     });
     return productSchema.validate(product);
   }
+
+  static productRequest(productRequest) {
+    let accountSchema = Joi.object({
+      clientNames: Joi.string().required(),
+      email: Joi.string().email().required(),
+      phoneNumber: Joi.string().allow(""),
+      quantity: Joi.number().required(),
+      product: Joi.string().required(),
+    });
+
+    return accountSchema.validate(productRequest);
+  }
 }
 
 export default Validator;
