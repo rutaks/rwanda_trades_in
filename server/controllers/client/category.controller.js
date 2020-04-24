@@ -21,7 +21,29 @@ class CategoryController {
         currentPage: page,
         pages: Math.ceil(count / resPerPage),
         numOfResults: count,
-        categoryId: categoryId
+        categoryId: categoryId,
+      },
+      "shop-items"
+    );
+  }
+
+  static async getByDepartmentName(req, res) {
+    const { categoryName } = req.params;
+    const resPerPage = 9; // results per page
+    const page = req.params.page || 1; // Page
+    const {
+      foundProducts,
+      count,
+      categoryId,
+    } = await categoryQuery.getDepartmentProductsByName(categoryName, page);
+    return sendPage(
+      res,
+      {
+        products: foundProducts,
+        currentPage: page,
+        pages: Math.ceil(count / resPerPage),
+        numOfResults: count,
+        categoryId: categoryId,
       },
       "shop-items"
     );

@@ -25,6 +25,17 @@ class CategoryQueries {
     const count = await Product.count({ category: categoryId });
     return { foundProducts, count };
   }
+
+  static async getDepartmentProductsByName(categoryName, page, resPerPage) {
+    const foundCategory = await Category.findOne({ name: categoryName });
+    let res = await this.getDepartmentProducts(
+      foundCategory._id,
+      page,
+      resPerPage
+    );
+    res.categoryId = foundCategory._id;
+    return res;
+  }
 }
 
 export default CategoryQueries;
