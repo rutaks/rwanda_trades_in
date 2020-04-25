@@ -21,6 +21,17 @@ class Validator {
     return accountSchema.validate({ email, password });
   }
 
+  static admin(admin) {
+    let adminSchema = Joi.object({
+      firstname: Joi.string().required(),
+      lastname: Joi.string().required(),
+      email: Joi.string().email().required(),
+      gender: Joi.string().required(),
+    });
+
+    return adminSchema.validate(admin);
+  }
+
   static category(category) {
     let categorySchema = Joi.object({
       name: Joi.string().required(),
