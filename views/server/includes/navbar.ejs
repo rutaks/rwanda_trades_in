@@ -3,10 +3,10 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo" href="index.html"><img src="/server/images/logo.svg"
-                        alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/server/images/logo-mini.svg"
-                        alt="logo" /></a>
+                <a class="navbar-brand brand-logo" href="index.html">
+                    <span style="color: white;">RTI</span>
+                </a>
+                <a class="navbar-brand brand-logo-mini" href="index.html"><span style="color: white;">RTI</span></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-stretch">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -39,19 +39,14 @@
                                 <div role="separator" class="dropdown-divider"></div>
                                 <h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Actions</h5>
                                 <a class="dropdown-item py-1 d-flex align-items-center justify-content-between"
-                                    href="#">
-                                    <span>Lock Account</span>
-                                    <i class="mdi mdi-lock ml-1"></i>
-                                </a>
-                                <a class="dropdown-item py-1 d-flex align-items-center justify-content-between"
-                                    href="#">
+                                    href="/auth/login">
                                     <span>Log Out</span>
                                     <i class="mdi mdi-logout ml-1"></i>
                                 </a>
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                             data-toggle="dropdown">
                             <i class="mdi mdi-bell-outline"></i>
@@ -103,7 +98,7 @@
                             <div class="dropdown-divider"></div>
                             <h6 class="p-3 mb-0 text-center">See all notifications</h6>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                     data-toggle="offcanvas">
@@ -156,6 +151,34 @@
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#product-requests" aria-expanded="false"
+                            aria-controls="product-requests">
+                            <span class="icon-bg"><i class="mdi mdi-file-check menu-icon"></i></span>
+                            <span class="menu-title">Product Requests</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="product-requests">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="/admin/product-requests">View Product
+                                        Requests</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#admins" aria-expanded="false"
+                            aria-controls="admins">
+                            <span class="icon-bg"><i class="mdi mdi-account-key menu-icon"></i></span>
+                            <span class="menu-title">Admins</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="admins">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="/admin/users/new">Add An
+                                        Admin</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                             aria-controls="ui-basic">
                             <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
@@ -172,26 +195,26 @@
                                         href="pages/ui-features/typography.html">Typography</a></li>
                             </ul>
                         </div>
-                    </li>
-                    <li class="nav-item">
+                    </li> -->
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="pages/icons/mdi.html">
                             <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
                             <span class="menu-title">Icons</span>
                         </a>
-                    </li>
-                    <li class="nav-item">
+                    </li> -->
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="pages/forms/basic_elements.html">
                             <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
                             <span class="menu-title">Forms</span>
                         </a>
-                    </li>
-                    <li class="nav-item">
+                    </li> -->
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="pages/charts/chartjs.html">
                             <span class="icon-bg"><i class="mdi mdi-chart-bar menu-icon"></i></span>
                             <span class="menu-title">Charts</span>
                         </a>
-                    </li>
-                    <li class="nav-item">
+                    </li> -->
+                    <!-- <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
                             aria-controls="auth">
                             <span class="icon-bg"><i class="mdi mdi-lock menu-icon"></i></span>
@@ -212,7 +235,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="nav-item sidebar-user-actions">
                         <div class="user-details">
                             <div class="d-flex justify-content-between align-items-center">
@@ -226,7 +249,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="badge badge-danger">3</div>
+                                <!-- <div class="badge badge-danger">3</div> -->
                             </div>
                         </div>
                     </li>
@@ -237,15 +260,15 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item sidebar-user-actions">
+                    <!-- <li class="nav-item sidebar-user-actions">
                         <div class="sidebar-user-menu">
                             <a href="#" class="nav-link"><i class="mdi mdi-speedometer menu-icon"></i>
                                 <span class="menu-title">Take Tour</span></a>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="nav-item sidebar-user-actions">
                         <div class="sidebar-user-menu">
-                            <a href="#" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
+                            <a href="/auth/login" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
                                 <span class="menu-title">Log Out</span></a>
                         </div>
                     </li>

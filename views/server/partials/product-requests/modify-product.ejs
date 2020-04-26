@@ -1,0 +1,62 @@
+<%- include('../../includes/header.ejs') %>
+<%- include('../../includes/navbar.ejs') %>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/admin/categories">Categories</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Modify Category: <%= category.name %></li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Add A New Category</h4>
+                        <p class="card-description"> Date Of Creation <code><%= category.createdOn %></code>
+                            <form class="forms-sample" action="/admin/categories/modify/<%=category._id%>"
+                                method="post">
+                                <div class="form-group row">
+                                    <div class="col-lg-12">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" name="name" placeholder="Name"
+                                            value="<%= typeof category != 'undefined'? category.name: '' %>">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-1 col-form-label">Status</label>
+                                    <div class="col-sm-1">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="status"
+                                                    value="active" <% if(category.status == true){ %> checked <%}%>> 
+                                                Active
+                                             </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="status"
+                                            value="inactive" <% if(category.status == false){ %> checked <%}%>> 
+                                            Inactive 
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <%if(typeof error != 'undefined'){%> <div class="alert alert-danger alert-dismissible">
+                                                <a href="#" class="close" data-dismiss="alert"
+                                                    aria-label="close">&times;</a>
+                                                <strong>Error:</strong> <%= error %>
+                                        </div>
+                                        <%}%>
+                            <button type="submit" class="btn btn-warning btn-block mr-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../../includes/footer.ejs') %>

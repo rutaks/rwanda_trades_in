@@ -1,0 +1,69 @@
+<%- include('../../includes/header.ejs') %>
+<%- include('../../includes/navbar.ejs') %>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/admin/products">Users</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add a New Admin</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row">
+            <!-- ON CREATION, SEND EMAIL TO CREATE ACCOUNT -->
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Create A New Admin</h4>
+                        <form class="forms-sample" action="/admin/users/new" method="post">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <!-- FIRST NAME FIELD -->
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" name="firstname"
+                                            value="<%= typeof previousInput != 'undefined'? previousInput.firstname: '' %>">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <!-- LAST NAME FIELD -->
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" name="lastname"
+                                            value="<%= typeof previousInput != 'undefined'? previousInput.lastname: '' %>">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <!-- LAST NAME FIELD -->
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" name="email"
+                                            value="<%= typeof previousInput != 'undefined'? previousInput.email : '' %>">
+                                    </div>
+                                </div>
+                                <!-- GENDER FIELD -->
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        <select class="form-control" name="gender">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <%if(typeof error != 'undefined'){%>
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Error:</strong> <%= error %>
+                            </div>
+                            <%}%>
+                            <button type="submit" class="btn btn-block btn-primary mr-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../../includes/footer.ejs') %>

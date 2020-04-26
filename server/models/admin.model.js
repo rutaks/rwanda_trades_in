@@ -5,23 +5,27 @@ const Schema = mongoose.Schema;
 const memberSchema = new Schema({
   firstname: {
     type: String,
-    required: true
+    required: true,
   },
   lastname: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
-    type: String
+    type: String,
   },
   gender: {
     type: String,
-    enum: ["Male", "Female"]
+    enum: ["Male", "Female"],
+  },
+  accountCreationToken: {
+    type: String,
+    required: false,
   },
   createOn: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 export default mongoose.model("Admin", memberSchema);

@@ -46,14 +46,6 @@ app.set("views", "views");
 
 /** Routes */
 /**
- * Route serving Welcome Response
- * @name /intro
- * @function
- * @param {string} path - Express path
- */
-app.get("/intro", (req, res) => res.render("server/index"));
-
-/**
  * Route serving API Routes
  * @name /
  * @function
@@ -86,7 +78,7 @@ const runServer = async () => {
       console.debug("INFO:", `RwandaTradesIn is now running on Port: ${port}`)
     );
   } catch (error) {
-    throw error;
+    console.log("Could Not Connect To Server");
   }
 };
 

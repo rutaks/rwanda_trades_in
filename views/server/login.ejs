@@ -35,7 +35,14 @@
                                     <strong>Error:</strong> <%= error %>
                                 </div>
                                 <%}%>
+                                <%if(messages.success){%>
+                                <div class="alert alert-success alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Success:</strong> <%- messages.success %>
+                                </div>
+                                <%}%>
                             </form>
+                                <span>Forgot Your Password? <a href="/auth/forgot-password">Click here</a></span>
                         </div>
                     </div>
                 </div>
