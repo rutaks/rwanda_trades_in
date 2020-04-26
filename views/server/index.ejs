@@ -39,7 +39,7 @@
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="mb-2 text-dark font-weight-normal">Categories</h5>
-                                        <h2 class="mb-4 text-dark font-weight-bold">12</h2>
+                                        <h2 class="mb-4 text-dark font-weight-bold"><%= totalCategories %></h2>
                                         <div
                                             class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent">
                                             <i
@@ -53,7 +53,7 @@
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="mb-2 text-dark font-weight-normal">Products</h5>
-                                        <h2 class="mb-4 text-dark font-weight-bold">1200</h2>
+                                        <h2 class="mb-4 text-dark font-weight-bold"><%= totalProducts %></h2>
                                         <div
                                             class="dashboard-progress dashboard-progress-2 d-flex align-items-center justify-content-center item-parent">
                                             <i class="mdi mdi-basket-fill icon-md absolute-center text-dark"></i>
@@ -65,7 +65,7 @@
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="mb-2 text-dark font-weight-normal">Requests</h5>
-                                        <h2 class="mb-4 text-dark font-weight-bold">12</h2>
+                                        <h2 class="mb-4 text-dark font-weight-bold"><%= totalProductRequests %></h2>
                                         <div
                                             class="dashboard-progress dashboard-progress-3 d-flex align-items-center justify-content-center item-parent">
                                             <i class="mdi mdi-file-check icon-md absolute-center text-dark"></i>
@@ -77,7 +77,7 @@
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="mb-2 text-dark font-weight-normal">Admins</h5>
-                                        <h2 class="mb-4 text-dark font-weight-bold">3</h2>
+                                        <h2 class="mb-4 text-dark font-weight-bold"><%= totalAdmins %></h2>
                                         <div
                                             class="dashboard-progress dashboard-progress-4 d-flex align-items-center justify-content-center item-parent">
                                             <i class="mdi mdi-account-key icon-md absolute-center text-dark"></i></div>
@@ -174,84 +174,6 @@
         <%- include('./includes/footer.ejs') %>
         <script>
             const charts = () => {
-                if ($("#total-profit-dark").length) {
-                    var graphGradient = document
-                        .getElementById("total-profit-dark")
-                        .getContext("2d");
-                    var saleGradientBg = graphGradient.createLinearGradient(15, 0, 15, 190);
-                    saleGradientBg.addColorStop(0, "rgba(0, 98, 255, .3)");
-                    saleGradientBg.addColorStop(1, "rgba(0, 0, 0, .2)");
-                    var totalProfitDarkData = {
-                        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
-                        datasets: [
-                            {
-                                label: "Margin",
-                                data: [5, 4, 6, 4.5, 5.5, 4, 5, 4.2, 5.5],
-                                backgroundColor: saleGradientBg,
-                                borderColor: ["#0062ff"],
-                                borderWidth: 3,
-                                fill: true,
-                            },
-                        ],
-                    };
-                    var totalProfitDarkOptions = {
-                        scales: {
-                            yAxes: [
-                                {
-                                    display: false,
-                                    gridLines: {
-                                        drawBorder: false,
-                                        display: false,
-                                        drawTicks: false,
-                                        zeroLineColor: "rgba(90, 113, 208, 0)",
-                                    },
-                                    ticks: {
-                                        beginAtZero: true,
-                                        stepSize: 10,
-                                    },
-                                },
-                            ],
-                            xAxes: [
-                                {
-                                    display: false,
-                                    position: "bottom",
-                                    gridLines: {
-                                        drawBorder: false,
-                                        display: false,
-                                        drawTicks: false,
-                                        zeroLineColor: "rgba(90, 113, 208, 0)",
-                                    },
-                                    ticks: {
-                                        beginAtZero: true,
-                                        stepSize: 10,
-                                    },
-                                },
-                            ],
-                        },
-                        legend: {
-                            display: false,
-                        },
-                        elements: {
-                            point: {
-                                radius: 0,
-                            },
-                            line: {
-                                tension: 0,
-                            },
-                        },
-                        tooltips: {
-                            backgroundColor: "rgba(2, 171, 254, 1)",
-                        },
-                    };
-                    var barChartCanvas = $("#total-profit-dark").get(0).getContext("2d");
-                    // This will get the first returned node in the jQuery collection.
-                    var barChart = new Chart(barChartCanvas, {
-                        type: "line",
-                        data: totalProfitDarkData,
-                        options: totalProfitDarkOptions,
-                    });
-                }
-
                 if ($("#device-sales").length) {
                     var deviceSalesData = {
                         labels: [

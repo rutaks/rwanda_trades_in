@@ -36,6 +36,10 @@ class CategoryQueries {
     res.categoryId = foundCategory._id;
     return res;
   }
+
+  static async getTotalCategories() {
+    return await Product.countDocuments({});
+  }
 }
 
 export default CategoryQueries;

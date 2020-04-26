@@ -6,12 +6,27 @@ import validate from "../../helpers/validators";
 import TokenHelper from "../../helpers/TokenHelper";
 import EmailHelper from "../../helpers/EmailHelper";
 import PasswordHelper from "../../helpers/PasswordHelper";
+import AdminQueries from "../../helpers/AdminQueries";
+import ProductQueries from "../../helpers/productQueries";
+import ProductRequestQueries from "../../helpers/ProductRequests";
+import CategoryQueries from "../../helpers/categoryQueries";
 
 const baseUrl = "server/partials/auth";
 /** Class Holding All User Authentication methods */
 class AuthController {
-  static getDashboard(req, res) {
-    return res.render("server/index");
+  static async getDashboard(req, res) {
+    const totalAdmins = await AdminQueries.getTotalAdmins();
+    const totalCategories = await CategoryQueries.getTotalCategories();
+    const totalProducts = await ProductQueries.getTotalProcucts();
+    const totalProductRequests = await ProductRequestQueries.getTotalRequests();
+    console.log(totalProductRequests);
+
+    return res.render("server/index", {
+      totalAdmins,
+      totalProductRequests,
+      totalProducts,
+      totalCategories,
+    });
   }
   static async getLoginPage(req, res) {
     res.status(201).render("server/login");

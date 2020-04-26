@@ -8,6 +8,10 @@ class ProductQueries {
   static async getProductsByCategoryId(categoryId, limit = 5) {
     return await Product.find({ category: categoryId }).limit(limit);
   }
+
+  static async getTotalProcucts() {
+    return await Product.countDocuments({});
+  }
 }
 
 export default ProductQueries;
