@@ -20,6 +20,12 @@
                             <strong>Success:</strong> <%- messages.success %>
                         </div>
                         <%}%>
+                        <%if(messages.error){%>
+                        <div class="alert alert-warning alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Error:</strong> <%- messages.error %>
+                        </div>
+                        <%}%>
                         <br>
                         <h1 class="card-title">All Product Requests</h1>
                         <table class="table table-bordered" id="order-listing">
@@ -27,9 +33,9 @@
                                 <tr>
                                     <th> # </th>
                                     <th> Product Img </th>
-                                    <th> Product Details </th>
+                                    <th> Product Details / Status </th>
                                     <th> Client </th>
-                                    <!-- <th> Operations </th> -->
+                                    <th> Operations </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,7 +45,19 @@
                             <td><img src="<%= productRequest.product.mainPicture %>"
                                     alt="<%= productRequest.product.name %>"></td>
                             <td>
-                                <!-- <a href="/admin/products/<%=productRequest.product._id%>"> -->
+                                <%if(productRequest.status === "ACCEPTED"){%>
+                                <span><i style="color:#03fc28"
+                                        class="mdi mdi-checkbox-marked-circle-outline"></i></span>
+                                <%}%>
+
+                                <%if(productRequest.status === "REJECTED"){%>
+                                <span><i style="color:#fc2403" class="mdi mdi-close-circle-outline"></i></span>
+                                <%}%>
+
+                                <%if(productRequest.status === "PENDING"){%>
+                                <span><i style="color:#fcce03" class="mdi mdi-pause-circle-outline"></i></span>
+                                <%}%>
+
                                 <%=productRequest.product.name%>
                                 <%=productRequest.product.currency%>
                                 <%=productRequest.product.price%> %>
@@ -48,22 +66,30 @@
                             <td>Names: <%=productRequest.clientNames%> <br /><br /> Email: <%=productRequest.email%>
                                 <br /><br /> Phone: <%=productRequest.phoneNumber%>
                             </td>
-                            <!-- <td>
-                                <a class="badge badge-warning" href="/admin/categories/modify/<=product._id%>">
-                                    <i class="mdi mdi-book-open-page-variant"></i>
-                                </a>
-                                <a class="badge badge-danger" href="/admin/categories/remove/<=product._id%>">
-                                    <i class="mdi mdi-block-helper"></i>
-                                </a>
-                                <br><br>
-                            </td> -->
+                            <td>
+                                <div class="row">
+                                    <%if(productRequest.status !== "ACCEPTED"){%>
+                                    <a class="col-lg-5 badge badge-success"
+                                        href="/admin/product-requests/<%=productRequest._id%>/change-status?status=ACCEPTED">
+                                        <i class="mdi mdi-checkbox-marked-circle-outline"></i>
+                                    </a>
+                                    <div class="col-lg-2"></div>
+                                    <%}%>
+                                    <%if(productRequest.status !== "REJECTED"){%>
+                                    <a class="col-lg-5 badge badge-danger"
+                                        href="/admin/product-requests/<%=productRequest._id%>/change-status?status=REJECTED">
+                                        <i class="mdi mdi-close-circle"></i>
+                                    </a>
+                                    <%}%>
+                                </div>
+                            </td>
                         </tr>
                         <% }) %>
-                        </tbody>
-                        </table>
+                                    </tbody>
+                                    </table>
+                                </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <%- include('../../includes/footer.ejs') %>
+        <%- include('../../includes/footer.ejs') %>

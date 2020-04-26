@@ -4,5 +4,9 @@ import productRequestController from "../../controllers/server/productRequest.co
 const router = Router();
 
 router.get("/", productRequestController.getAllProductRequests);
+router.get(
+  "/:productRequestId/change-status",
+  productRequestController.changeProductRequestStatus
+);
 
 export default router;

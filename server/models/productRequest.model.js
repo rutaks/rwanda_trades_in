@@ -18,6 +18,11 @@ const productRequestSchema = new Schema({
     ref: "Product",
     required: true,
   },
+  status: {
+    type: String,
+    enum: ["REJECTED", "ACCEPTED", "PENDING"],
+    default: "PENDING",
+  },
   quantity: {
     type: Number,
     required: true,
