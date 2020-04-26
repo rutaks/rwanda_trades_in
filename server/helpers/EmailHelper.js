@@ -69,10 +69,10 @@ class EmailHelper {
   static async sendForgotPasswordMail(req, accountOwner, passwordResetToken) {
     try {
       const emailReceiver = accountOwner.email;
-      const accountOwnerName = `${accountOwner.firstName} ${accountOwner.lastName}`;
+      const accountOwnerName = `${accountOwner.firstname} ${accountOwner.lastname}`;
       const host = req.headers.host;
-      const token = passwordResetToken.token;
-      const link = `http://${host}/reset-password/?token=${token}`;
+      const token = passwordResetToken;
+      const link = `http://${host}/auth/reset-password/${token}`;
       const text = `Hi ${accountOwnerName} \n  Please click on the following link ${link} 
       to reset your password. \n\n 
       If you did not request this, please ignore this email and your password will 

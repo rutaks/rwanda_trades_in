@@ -1,3 +1,617 @@
 <%- include('./includes/header.ejs') %>
 <%- include('./includes/navbar.ejs') %>
-<%- include('./includes/footer.ejs') %>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row" id="proBanner">
+            <div class="col-12">
+                <span class="d-flex align-items-center purchase-popup">
+                    <a href="https://github.com/BootstrapDash/ConnectPlusAdmin-Free-Bootstrap-Admin-Template"
+                        target="_blank" class="btn ml-auto download-button">.</a>
+                    <a href="http://www.bootstrapdash.com/demo/connect-plus/jquery/template/" target="_blank"
+                        class="btn purchase-button">.</a>
+                    <i class="mdi mdi-close" id="bannerClose"></i>
+                </span>
+            </div>
+        </div>
+        <div class="d-xl-flex justify-content-between align-items-start">
+            <h2 class="text-dark font-weight-bold mb-2"> Overview dashboard </h2>
+            <div class="d-sm-flex justify-content-xl-between align-items-center mb-2">
+                <div class="dropdown ml-0 ml-md-4 mt-2 mt-lg-0">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
+                    <ul class="nav nav-tabs tab-transparent" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="business-tab" data-toggle="tab" href="#business-1" role="tab"
+                                aria-selected="false">Activities</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content tab-transparent-content">
+                    <div class="tab-pane fade show active" id="business-1" role="tabpanel"
+                        aria-labelledby="business-tab">
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5 class="mb-2 text-dark font-weight-normal">Categories</h5>
+                                        <h2 class="mb-4 text-dark font-weight-bold">12</h2>
+                                        <div
+                                            class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent">
+                                            <i
+                                                class="mdi mdi-arrange-send-to-back icon-md absolute-center text-dark"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5 class="mb-2 text-dark font-weight-normal">Products</h5>
+                                        <h2 class="mb-4 text-dark font-weight-bold">1200</h2>
+                                        <div
+                                            class="dashboard-progress dashboard-progress-2 d-flex align-items-center justify-content-center item-parent">
+                                            <i class="mdi mdi-basket-fill icon-md absolute-center text-dark"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3  col-lg-6 col-sm-6 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5 class="mb-2 text-dark font-weight-normal">Requests</h5>
+                                        <h2 class="mb-4 text-dark font-weight-bold">12</h2>
+                                        <div
+                                            class="dashboard-progress dashboard-progress-3 d-flex align-items-center justify-content-center item-parent">
+                                            <i class="mdi mdi-file-check icon-md absolute-center text-dark"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5 class="mb-2 text-dark font-weight-normal">Admins</h5>
+                                        <h2 class="mb-4 text-dark font-weight-bold">3</h2>
+                                        <div
+                                            class="dashboard-progress dashboard-progress-4 d-flex align-items-center justify-content-center item-parent">
+                                            <i class="mdi mdi-account-key icon-md absolute-center text-dark"></i></div>
+                                        <p class="mt-4 mb-0">.</p>
+                                        <h3 class="mb-0 font-weight-bold mt-2 text-dark">.</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 grid-margin">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                                    <h4 class="card-title mb-0">Recent Activity</h4>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-4 grid-margin  grid-margin-lg-0">
+                                                <div class="wrapper pb-5 border-bottom">
+                                                    <div
+                                                        class="text-wrapper d-flex align-items-center justify-content-between mb-2">
+                                                        <p class="mb-0 text-dark">Total Accepted Requests</p>
+                                                    </div>
+                                                    <h3 class="mb-0 text-dark font-weight-bold">5</h3>
+                                                    <canvas id="total-profit"></canvas>
+                                                </div>
+                                                <div class="wrapper pt-5">
+                                                    <div
+                                                        class="text-wrapper d-flex align-items-center justify-content-between mb-2">
+                                                        <p class="mb-0 text-dark">Total Rejected Requests</p>
+                                                    </div>
+                                                    <h3 class="mb-4 text-dark font-weight-bold">5</h3>
+                                                    <canvas id="total-expences"></canvas>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9 col-sm-8 grid-margin  grid-margin-lg-0">
+                                                <div class="pl-0 pl-lg-4 ">
+                                                    <div
+                                                        class="d-xl-flex justify-content-between align-items-center mb-2">
+                                                        <div class="d-lg-flex align-items-center mb-lg-2 mb-xl-0">
+                                                            <h3 class="text-dark font-weight-bold mr-2 mb-0">Product
+                                                                Request Activities</h3>
+                                                            <h5 class="mb-0"></h5>
+                                                        </div>
+                                                        <div class="d-lg-flex">
+                                                            <p class="mr-2 mb-0">Timezone:</p>
+                                                            <p class="text-dark font-weight-bold mb-0">GMT-0200 Eastern
+                                                                Time</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="graph-custom-legend clearfix" id="device-sales-legend">
+                                                    </div>
+                                                    <canvas id="device-sales"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 grid-margin stretch-card">
+                                <div class="card card-danger-gradient">
+                                    <div class="card-body mb-4">
+                                        <h4 class="card-title text-white">Account Retention</h4>
+                                        <canvas id="account-retension"></canvas>
+                                    </div>
+                                    <div class="card-body bg-white pt-4">
+                                        <div class="row pt-4">
+                                            <div class="col-sm-6">
+                                                <div class="text-center border-right border-md-0">
+                                                    <h4>Successful Requests</h4>
+                                                    <h1 class="text-dark font-weight-bold mb-md-3">1200</h1>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="text-center">
+                                                    <h4>Cancellation Requests</h4>
+                                                    <h1 class="text-dark font-weight-bold">50</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('./includes/footer.ejs') %>
+        <script>
+            const charts = () => {
+                if ($("#total-profit-dark").length) {
+                    var graphGradient = document
+                        .getElementById("total-profit-dark")
+                        .getContext("2d");
+                    var saleGradientBg = graphGradient.createLinearGradient(15, 0, 15, 190);
+                    saleGradientBg.addColorStop(0, "rgba(0, 98, 255, .3)");
+                    saleGradientBg.addColorStop(1, "rgba(0, 0, 0, .2)");
+                    var totalProfitDarkData = {
+                        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+                        datasets: [
+                            {
+                                label: "Margin",
+                                data: [5, 4, 6, 4.5, 5.5, 4, 5, 4.2, 5.5],
+                                backgroundColor: saleGradientBg,
+                                borderColor: ["#0062ff"],
+                                borderWidth: 3,
+                                fill: true,
+                            },
+                        ],
+                    };
+                    var totalProfitDarkOptions = {
+                        scales: {
+                            yAxes: [
+                                {
+                                    display: false,
+                                    gridLines: {
+                                        drawBorder: false,
+                                        display: false,
+                                        drawTicks: false,
+                                        zeroLineColor: "rgba(90, 113, 208, 0)",
+                                    },
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 10,
+                                    },
+                                },
+                            ],
+                            xAxes: [
+                                {
+                                    display: false,
+                                    position: "bottom",
+                                    gridLines: {
+                                        drawBorder: false,
+                                        display: false,
+                                        drawTicks: false,
+                                        zeroLineColor: "rgba(90, 113, 208, 0)",
+                                    },
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 10,
+                                    },
+                                },
+                            ],
+                        },
+                        legend: {
+                            display: false,
+                        },
+                        elements: {
+                            point: {
+                                radius: 0,
+                            },
+                            line: {
+                                tension: 0,
+                            },
+                        },
+                        tooltips: {
+                            backgroundColor: "rgba(2, 171, 254, 1)",
+                        },
+                    };
+                    var barChartCanvas = $("#total-profit-dark").get(0).getContext("2d");
+                    // This will get the first returned node in the jQuery collection.
+                    var barChart = new Chart(barChartCanvas, {
+                        type: "line",
+                        data: totalProfitDarkData,
+                        options: totalProfitDarkOptions,
+                    });
+                }
+
+                if ($("#device-sales").length) {
+                    var deviceSalesData = {
+                        labels: [
+                            "Iphone",
+                            "Google",
+                            "Sumsung",
+                            "Huawei",
+                            "Xiaomi",
+                            "Oppo",
+                            "Vivo",
+                            "Lg",
+                        ],
+                        datasets: [
+                            {
+                                label: "Accepted",
+                                data: [450, 500, 300, 350, 200, 320, 310, 700],
+                                backgroundColor: [
+                                    "#a461d8",
+                                    "#a461d8",
+                                    "#a461d8",
+                                    "#a461d8",
+                                    "#a461d8",
+                                    "#a461d8",
+                                    "#a461d8",
+                                    "#a461d8",
+                                ],
+                                borderColor: [
+                                    "#a461d8",
+                                    "#a461d8",
+                                    "#a461d8",
+                                    "#a461d8",
+                                    "#a461d8",
+                                    "#a461d8",
+                                    "#a461d8",
+                                    "#a461d8",
+                                ],
+                                borderWidth: 1,
+                                fill: false,
+                            },
+                            {
+                                label: "Rejected",
+                                data: [250, 100, 310, 75, 290, 100, 500, 260],
+                                backgroundColor: [
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                ],
+                                borderColor: [
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                    "#fc5a5a",
+                                ],
+                                borderWidth: 1,
+                                fill: false,
+                            },
+                        ],
+                    };
+                    var deviceSalesOptions = {
+                        scales: {
+                            xAxes: [
+                                {
+                                    stacked: false,
+                                    barPercentage: 0.5,
+                                    categoryPercentage: 0.4,
+                                    position: "bottom",
+                                    display: true,
+                                    gridLines: {
+                                        display: false,
+                                        drawBorder: false,
+                                        drawTicks: false,
+                                    },
+                                    ticks: {
+                                        display: true, //this will remove only the label
+                                        stepSize: 500,
+                                        fontColor: "#a7afb7",
+                                        fontSize: 14,
+                                        padding: 10,
+                                    },
+                                },
+                            ],
+                            yAxes: [
+                                {
+                                    stacked: false,
+                                    display: true,
+                                    gridLines: {
+                                        drawBorder: false,
+                                        display: true,
+                                        color: "#eef0fa",
+                                        drawTicks: false,
+                                        zeroLineColor: "rgba(90, 113, 208, 0)",
+                                    },
+                                    ticks: {
+                                        display: true,
+                                        beginAtZero: true,
+                                        stepSize: 200,
+                                        fontColor: "#a7afb7",
+                                        fontSize: 14,
+                                        callback: function (value, index, values) {
+                                            return value + "k";
+                                        },
+                                    },
+                                },
+                            ],
+                        },
+                        legend: {
+                            display: false,
+                        },
+                        legendCallback: function (chart) {
+                            var text = [];
+                            text.push('<ul class="' + chart.id + '-legend">');
+                            for (var i = 0; i < chart.data.datasets.length; i++) {
+                                text.push(
+                                    '<li><span class="legend-box" style="background:' +
+                                    chart.data.datasets[i].backgroundColor[i] +
+                                    ';"></span><span class="legend-label text-dark">'
+                                );
+                                if (chart.data.datasets[i].label) {
+                                    text.push(chart.data.datasets[i].label);
+                                }
+                                text.push("</span></li>");
+                            }
+                            text.push("</ul>");
+                            return text.join("");
+                        },
+                        tooltips: {
+                            backgroundColor: "rgba(0, 0, 0, 1)",
+                        },
+                        plugins: {
+                            datalabels: {
+                                display: false,
+                                align: "center",
+                                anchor: "center",
+                            },
+                        },
+                    };
+                    var barChartCanvas = $("#device-sales").get(0).getContext("2d");
+                    // This will get the first returned node in the jQuery collection.
+                    var barChart = new Chart(barChartCanvas, {
+                        type: "bar",
+                        data: deviceSalesData,
+                        options: deviceSalesOptions,
+                    });
+                    document.getElementById(
+                        "device-sales-legend"
+                    ).innerHTML = barChart.generateLegend();
+                }
+                if ($("#account-retension").length) {
+                    var accountRetensionData = {
+                        labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+                        datasets: [
+                            {
+                                label: "Demand",
+                                data: [33, 48, 39, 36, 36],
+                                backgroundColor: [
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                ],
+                                borderColor: [
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                ],
+                                borderWidth: 1,
+                                fill: false,
+                            },
+                            {
+                                label: "Demand",
+                                data: [94, 28, 49, 25, 20],
+                                backgroundColor: [
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                ],
+                                borderColor: [
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                ],
+                                borderWidth: 1,
+                                fill: false,
+                            },
+                            {
+                                label: "Demand",
+                                data: [66, 33, 25, 36, 69],
+                                backgroundColor: [
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                ],
+                                borderColor: [
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                    "#d8d8d8",
+                                ],
+                                borderWidth: 1,
+                                fill: false,
+                            },
+                        ],
+                    };
+                    var accountRetensionOptions = {
+                        scales: {
+                            xAxes: [
+                                {
+                                    stacked: false,
+                                    position: "bottom",
+                                    display: true,
+                                    barPercentage: 0.7,
+                                    categoryPercentage: 1,
+                                    gridLines: {
+                                        display: false,
+                                        drawBorder: false,
+                                        drawTicks: false,
+                                    },
+                                    ticks: {
+                                        display: true, //this will remove only the label
+                                        stepSize: 500,
+                                        fontColor: "#a7afb7",
+                                        fontSize: 14,
+                                        padding: 10,
+                                    },
+                                },
+                            ],
+                            yAxes: [
+                                {
+                                    stacked: false,
+                                    display: true,
+                                    gridLines: {
+                                        drawBorder: false,
+                                        display: true,
+                                        color: "#c31a56",
+                                        drawTicks: false,
+                                        zeroLineColor: "rgba(90, 113, 208, 0)",
+                                    },
+                                    ticks: {
+                                        display: false,
+                                        beginAtZero: true,
+                                        stepSize: 40,
+                                        fontColor: "#a7afb7",
+                                        fontSize: 14,
+                                        callback: function (value, index, values) {
+                                            return value + "k";
+                                        },
+                                    },
+                                },
+                            ],
+                        },
+                        legend: {
+                            display: false,
+                        },
+                        tooltips: {
+                            backgroundColor: "rgba(0, 0, 0, 1)",
+                        },
+                        plugins: {
+                            datalabels: {
+                                display: false,
+                                align: "center",
+                                anchor: "center",
+                            },
+                        },
+                    };
+                    var barChartCanvas = $("#account-retension").get(0).getContext("2d");
+                    // This will get the first returned node in the jQuery collection.
+                    var barChart = new Chart(barChartCanvas, {
+                        type: "bar",
+                        data: accountRetensionData,
+                        options: accountRetensionOptions,
+                    });
+                }
+                if ($("#total-expences").length) {
+                    var totalExpencesData = {
+                        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+                        datasets: [
+                            {
+                                label: "Margin",
+                                data: [4, 5, 6, 5, 4, 5, 4, 6, 5],
+                                backgroundColor: ["#ff7896"],
+                                borderColor: ["#a8324c"],
+                                borderWidth: 3,
+                                fill: true,
+                            },
+                        ],
+                    };
+                    var totalExpencesOptions = {
+                        scales: {
+                            yAxes: [
+                                {
+                                    display: false,
+                                    gridLines: {
+                                        drawBorder: false,
+                                        display: false,
+                                        drawTicks: false,
+                                    },
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 10,
+                                    },
+                                },
+                            ],
+                            xAxes: [
+                                {
+                                    display: false,
+                                    position: "bottom",
+                                    gridLines: {
+                                        drawBorder: false,
+                                        display: false,
+                                        drawTicks: false,
+                                    },
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 10,
+                                    },
+                                },
+                            ],
+                        },
+                        legend: {
+                            display: false,
+                        },
+                        elements: {
+                            point: {
+                                radius: 0,
+                            },
+                            line: {
+                                tension: 0,
+                            },
+                        },
+                        tooltips: {
+                            backgroundColor: "rgba(2, 171, 254, 1)",
+                        },
+                    };
+                    var barChartCanvas = $("#total-expences").get(0).getContext("2d");
+                    // This will get the first returned node in the jQuery collection.
+                    var barChart = new Chart(barChartCanvas, {
+                        type: "line",
+                        data: totalExpencesData,
+                        options: totalExpencesOptions,
+                    });
+                }
+            }
+            charts();
+        </script>

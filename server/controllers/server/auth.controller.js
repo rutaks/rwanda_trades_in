@@ -17,6 +17,39 @@ class AuthController {
     res.status(201).render("server/login");
   }
 
+  static async login(req, res) {
+    const { email, password } = req.body;
+    const { value, error } = validate.account(email, password);
+
+    if (error) {
+      if (error.details)
+        return sendErrorMessage(res, error.details[0].message, value);
+      else return sendErrorMessage(res, error.message, value);
+    }
+
+    // eslint-disable-next-line no-useless-catch
+    try {
+      const foundAccount = await Account.findOne({
+        username: email,
+      }).populate("owner");
+      if (!foundAccount) {
+        return sendErrorMessage(res, "", value);
+      }
+      const isPasswordValid = auth.isPasswordValid(
+        password,
+        foundAccount.password
+      );
+      if (!isPasswordValid) {
+        return sendErrorMessage(res, "", value);
+      }
+      req.session.isLoggedIn = true;
+      req.session.account = foundAccount.owner;
+      return res.redirect("/admin/");
+    } catch (err) {
+      throw err;
+    }
+  }
+
   static async getCreateUserPage(req, res) {
     res.status(201).render(`${baseUrl}/add-user`);
   }
@@ -93,36 +126,71 @@ class AuthController {
     }
   }
 
-  static async login(req, res) {
-    const { email, password } = req.body;
-    const { value, error } = validate.account(email, password);
+  static async getForgotPasswordPage(req, res) {
+    res.render("server/forgot-password");
+  }
 
-    if (error) {
-      if (error.details)
-        return sendErrorMessage(res, error.details[0].message, value);
-      else return sendErrorMessage(res, error.message, value);
+  static async sendForgotPasswordRequest(req, res) {
+    const { email } = req.body;
+    if (!validate.isValidEmail(email)) {
+      req.flash("error", "Invalid Email");
+      return res.redirect(`/auth/forgot-password`);
     }
+    try {
+      const foundAccount = await Account.findOne({ username: email });
+      if (!foundAccount) {
+        req.flash("error", "No account found with submitted username");
+        return res.redirect(`/auth/forgot-password`);
+      }
+      const foundAdmin = await Admin.findOne({ email: email });
+      const {
+        resetPasswordToken,
+        resetPasswordExpires,
+      } = await TokenHelper.generatePasswordResetToken();
+      foundAccount.resetPasswordToken = resetPasswordToken;
+      foundAccount.resetPasswordExpires = resetPasswordExpires;
+      foundAccount.save();
+      EmailHelper.sendForgotPasswordMail(req, foundAdmin, resetPasswordToken);
+      req.flash("success", "Request Successful, Check your email");
+      res.redirect("/auth/forgot-password");
+    } catch (error) {
+      req.flash("error", "Something Happened Try Again Later");
+      return res.redirect(`/auth/forgot-password`);
+    }
+  }
 
-    // eslint-disable-next-line no-useless-catch
+  static async getResetPasswordPage(req, res) {
+    const { token } = req.params;
+    res.render("server/reset-password", { token: token });
+  }
+
+  static async resetPassword(req, res) {
+    const { password, confirmPassword } = req.body;
+    const { token } = req.params;
+    if (!(await PasswordHelper.isSecurePassword(password))) {
+      req.flash("error", "Passwords is not strong enough");
+      return res.redirect(`/auth/reset-password/${token}`);
+    }
+    if (password !== confirmPassword) {
+      req.flash("error", "Passwords do not match");
+      return res.redirect(`/auth/reset-password/${token}`);
+    }
     try {
       const foundAccount = await Account.findOne({
-        username: email,
-      }).populate("owner");
+        resetPasswordToken: token,
+        resetPasswordExpires: { $gt: Date.now() },
+      });
       if (!foundAccount) {
-        return sendErrorMessage(res, "", value);
+        req.flash("error", "No request with the registered token found");
+        return res.redirect(`/auth/reset-password/${token}`);
       }
-      const isPasswordValid = auth.isPasswordValid(
-        password,
-        foundAccount.password
-      );
-      if (!isPasswordValid) {
-        return sendErrorMessage(res, "", value);
-      }
-      req.session.isLoggedIn = true;
-      req.session.account = foundAccount.owner;
-      return res.redirect("/admin/");
-    } catch (err) {
-      throw err;
+      foundAccount.password = await PasswordHelper.hashPassword(password);
+      foundAccount.save();
+      req.flash("success", "Password was reset successfully");
+      res.redirect("/auth/login");
+    } catch (error) {
+      req.flash("error", "Something Happened Try Again Later");
+      return res.redirect(`/auth/reset-password/${token}`);
     }
   }
 }

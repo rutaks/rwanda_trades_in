@@ -1,6 +1,11 @@
 import Joi from "@hapi/joi";
 
 class Validator {
+  static isValidEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
   static isValidPicture(file) {
     if (typeof file === "undefined") return false;
     return /\.(gif|jpg|jpeg|tiff|png)$/i.test(file[0].path);
