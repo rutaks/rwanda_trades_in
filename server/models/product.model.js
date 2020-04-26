@@ -5,42 +5,50 @@ const Schema = mongoose.Schema;
 const productSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   price: {
     type: Number,
-    required: true
+    required: true,
   },
   currency: {
     type: String,
     required: true,
-    enum: ["USD", "UAE", "RWF"]
+    enum: ["USD", "UAE", "RWF"],
   },
   description: {
-    type: String
+    type: String,
   },
   mainPicture: {
     type: String,
-    required: true
+    required: true,
   },
   secondPicture: {
-    type: String
+    type: String,
   },
   thirdPicture: {
-    type: String
+    type: String,
   },
   fourthPicture: {
-    type: String
+    type: String,
   },
   category: {
     type: Schema.Types.ObjectId,
     ref: "Category",
-    required: true
+    required: true,
+  },
+  successfulRequests: {
+    type: Number,
+    default: 0,
+  },
+  rejectedRequests: {
+    type: Number,
+    default: 0,
   },
   createOn: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 export default mongoose.model("Product", productSchema);

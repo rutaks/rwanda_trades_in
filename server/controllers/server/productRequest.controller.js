@@ -1,4 +1,5 @@
 import ProductRequest from "../../models/productRequest.model";
+import Product from "../../models/product.model";
 
 const baseUrl = "server/partials/product-requests";
 class ProductRequestController {
@@ -22,8 +23,12 @@ class ProductRequestController {
         req.flash("error", "Product Request Was Not Found");
         res.redirect("/admin/product-requests");
       }
+      const foundProduct = await Product.findById(foundProductRequest.product);
+      if (status === "ACCEPTED") foundProduct.successfulRequests += 1;
+      if (status === "REJECTED") foundProduct.rejectedRequests += 1;
       foundProductRequest.status = status;
       foundProductRequest.save();
+      foundProduct.save();
       req.flash(
         "success",
         `Request was ${status !== "REJECTED" ? "Approved" : "Rejected"}`

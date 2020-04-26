@@ -8,7 +8,7 @@ import EmailHelper from "../../helpers/EmailHelper";
 import PasswordHelper from "../../helpers/PasswordHelper";
 import AdminQueries from "../../helpers/AdminQueries";
 import ProductQueries from "../../helpers/productQueries";
-import ProductRequestQueries from "../../helpers/ProductRequests";
+import ProductRequestQueries from "../../helpers/ProductRequestQueries";
 import CategoryQueries from "../../helpers/categoryQueries";
 
 const baseUrl = "server/partials/auth";
@@ -19,8 +19,6 @@ class AuthController {
     const totalCategories = await CategoryQueries.getTotalCategories();
     const totalProducts = await ProductQueries.getTotalProcucts();
     const totalProductRequests = await ProductRequestQueries.getTotalRequests();
-    console.log(totalProductRequests);
-
     return res.render("server/index", {
       totalAdmins,
       totalProductRequests,
@@ -83,7 +81,6 @@ class AuthController {
       const { token } = await TokenHelper.generateToken();
       value.accountCreationToken = token;
       const newAdmin = Admin(value);
-      console.log(newAdmin);
       newAdmin.save();
       EmailHelper.sendAdminAccountCreationEmail(req, newAdmin);
       req.flash(
@@ -110,7 +107,6 @@ class AuthController {
   static async validateAdminCreation(req, res) {
     const { password, confirmPassword } = req.body;
     const { token } = req.params;
-    console.log(password);
     if (!(await PasswordHelper.isSecurePassword(password))) {
       req.flash("error", "Passwords is not strong enough");
       return res.redirect(`/auth/final-step/${token}`);
