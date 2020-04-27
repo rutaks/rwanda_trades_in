@@ -1,5 +1,6 @@
 import ProductRequest from "../models/productRequest.model";
 import Product from "../models/product.model";
+import DateHelper from "./DateHelper";
 
 class ProductRequestQueries {
   static async getTotalRequests() {
@@ -25,6 +26,18 @@ class ProductRequestQueries {
       .select(query)
       .limit(limit);
     return foundRequests;
+  }
+
+  static async getTotalRequestsCountByMonth({
+    firstDayOfMonth,
+    lastDayOfMonth,
+  }) {
+    const month = DateHelper.getMonthName(firstDayOfMonth.getMonth());
+    const total = await ProductRequest.countDocuments({
+      createdOn: { $gte: firstDayOfMonth, $lte: lastDayOfMonth },
+    });
+
+    return { month, total };
   }
 }
 

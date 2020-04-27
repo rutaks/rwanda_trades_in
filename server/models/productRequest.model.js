@@ -27,6 +27,10 @@ const productRequestSchema = new Schema({
     type: Number,
     required: true,
   },
+  createdOn: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export default mongoose.model("ProductRequest", productRequestSchema);

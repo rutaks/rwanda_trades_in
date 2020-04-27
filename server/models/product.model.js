@@ -45,7 +45,7 @@ const productSchema = new Schema({
     type: Number,
     default: 0,
   },
-  createOn: {
+  createdOn: {
     type: Date,
     default: Date.now,
   },

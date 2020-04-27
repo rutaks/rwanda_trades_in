@@ -22,7 +22,7 @@ const memberSchema = new Schema({
     type: String,
     required: false,
   },
-  createOn: {
+  createdOn: {
     type: Date,
     default: Date.now,
   },
