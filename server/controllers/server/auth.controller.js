@@ -69,6 +69,17 @@ class AuthController {
 
   static async createUserPage(req, res) {
     const { value, error } = validate.admin(req.body);
+    const {
+      categoriesAccessRead,
+      categoriesAccessWrite,
+      productsAccessRead,
+      productsAccessWrite,
+      adminsAccessRead,
+      adminsAccessWrite,
+      productRequestsAccessRead,
+      productRequestsAccessWrite,
+    } = req.body;
+
     if (error) {
       return sendErrorMessage_(
         res,
@@ -78,8 +89,34 @@ class AuthController {
       );
     }
     try {
+      const permissions = [];
+      AdminQueries.assignPermissionsToSection(
+        "products",
+        productsAccessRead,
+        productsAccessWrite,
+        permissions
+      );
+      AdminQueries.assignPermissionsToSection(
+        "productrequests",
+        productRequestsAccessRead,
+        productRequestsAccessWrite,
+        permissions
+      );
+      AdminQueries.assignPermissionsToSection(
+        "categories",
+        categoriesAccessRead,
+        categoriesAccessWrite,
+        permissions
+      );
+      AdminQueries.assignPermissionsToSection(
+        "admins",
+        adminsAccessRead,
+        adminsAccessWrite,
+        permissions
+      );
       const { token } = await TokenHelper.generateToken();
       value.accountCreationToken = token;
+      value.permissions = permissions;
       const newAdmin = Admin(value);
       newAdmin.save();
       EmailHelper.sendAdminAccountCreationEmail(req, newAdmin);
@@ -90,11 +127,13 @@ class AuthController {
       return res.redirect("/admin/products");
     } catch (error) {
       //HANDLE ERROR
+      console.log(error);
+
       sendErrorMessage_(
         res,
         "Something Went Wrong, Try again later.",
         value,
-        "add-user"
+        "/add-user"
       );
     }
   }

@@ -6,13 +6,20 @@ class IndexController {
   static async getHomePage(req, res) {
     const {
       menProducts,
-      womenProducts
+      womenProducts,
     } = await categoryQuery.getHomePageComponents();
     const categories = await categoryQuery.getAllCategories();
     return res.render(`${baseUrl}/home`, {
       categories: categories,
       menProducts: menProducts,
-      womenProducts: womenProducts
+      womenProducts: womenProducts,
+    });
+  }
+
+  static async getContactPage(req, res) {
+    const categories = await categoryQuery.getAllCategories();
+    return res.render(`${baseUrl}/contact-us`, {
+      categories: categories,
     });
   }
 }

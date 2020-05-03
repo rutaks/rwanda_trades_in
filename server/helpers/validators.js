@@ -32,7 +32,7 @@ class Validator {
       lastname: Joi.string().required(),
       email: Joi.string().email().required(),
       gender: Joi.string().required(),
-    });
+    }).unknown();
 
     return adminSchema.validate(admin);
   }

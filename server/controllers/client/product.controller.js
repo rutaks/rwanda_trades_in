@@ -16,6 +16,37 @@ class ProductController {
       similarProducts,
     });
   }
+  static async searchProduct(req, res) {
+    const { searchQuery } = req.body;
+    const resPerPage = 9; // results per page
+    const page = req.params.page || 1; // Page
+    const {
+      foundProducts,
+      count,
+    } = await await ProductQueries.getDepartmentProductsByName(
+      searchQuery,
+      page
+    );
+
+    return sendPage(
+      res,
+      {
+        products: foundProducts,
+        currentPage: page,
+        pages: Math.ceil(count / resPerPage),
+        numOfResults: count,
+        searchQuery: searchQuery,
+      },
+      "client",
+      "/query-results-search"
+    );
+  }
 }
+
+const sendPage = async (res, data, baseUrl, pageName) => {
+  const categories = await CategoryQueries.getAllCategories();
+  data.categories = categories;
+  res.render(`${baseUrl}/${pageName}`, data);
+};
 
 export default ProductController;

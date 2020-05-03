@@ -4,6 +4,24 @@ import auth from "../helpers/auth";
 
 class AuthMocks {
   static async setupAdmin() {
+    // permissions: [
+    //   {
+    //     section: String,
+    //     access: {
+    //       read: Boolean,
+    //       write: Boolean,
+    //     },
+    //   },
+    // ]
+    let permissions = [
+      {
+        section: "admins",
+        access: {
+          read: true,
+          write: true,
+        },
+      },
+    ];
     try {
       const foundAdmin = await Admin.findOne({
         email: "rootsum.dev@gmail.com",
@@ -14,6 +32,7 @@ class AuthMocks {
         lastname: "Doe",
         email: "rootsum.dev@gmail.com",
         gender: "Male",
+        permissions: permissions,
       });
       await admin.save();
       let hashPassword = auth.hashPassword("Password123!@#");
