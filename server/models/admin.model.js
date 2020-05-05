@@ -22,7 +22,16 @@ const memberSchema = new Schema({
     type: String,
     required: false,
   },
-  createOn: {
+  permissions: [
+    {
+      section: String,
+      access: {
+        read: Boolean,
+        write: Boolean,
+      },
+    },
+  ],
+  createdOn: {
     type: Date,
     default: Date.now,
   },

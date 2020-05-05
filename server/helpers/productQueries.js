@@ -12,6 +12,24 @@ class ProductQueries {
   static async getTotalProcucts() {
     return await Product.countDocuments({});
   }
+
+  static async getDepartmentProductsByName(productName, page, resPerPage) {
+    const foundProducts = await Product.find({
+      name: {
+        $regex: productName,
+        $options: "i",
+      },
+    })
+      .skip(resPerPage * page - resPerPage)
+      .limit(resPerPage);
+    const count = await Product.count({
+      name: {
+        $regex: productName,
+        $options: "i",
+      },
+    });
+    return { foundProducts, count };
+  }
 }
 
 export default ProductQueries;

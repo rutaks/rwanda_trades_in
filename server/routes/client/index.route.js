@@ -7,6 +7,7 @@ import productRequestRoute from "./productRequest.route";
 const router = Router();
 
 router.get("/", indexController.getHomePage);
+router.get("/contact-us", indexController.getContactPage);
 router.use("/categories", categoryRoute);
 router.use("/products", productRoute);
 router.use("/product-requests", productRequestRoute);

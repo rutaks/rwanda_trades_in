@@ -28,6 +28,12 @@ class CategoryQueries {
 
   static async getDepartmentProductsByName(categoryName, page, resPerPage) {
     const foundCategory = await Category.findOne({ name: categoryName });
+    if (!foundCategory) {
+      const arr = [];
+      const count = 0;
+      const categoryId = "0";
+      return { arr, count, categoryId };
+    }
     let res = await this.getDepartmentProducts(
       foundCategory._id,
       page,

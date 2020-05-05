@@ -8,7 +8,16 @@ const baseUrl = "server/partials/products";
 class productController {
   static async addProduct(req, res) {
     let errorMessage = null;
-    const { name, currency, price, category, description } = req.body;
+    const {
+      name,
+      currency,
+      price,
+      category,
+      description,
+      discountDeadline,
+      discountPercent,
+    } = req.body;
+
     const { value, error } = validate.product(req.body);
     if (!Validator.isValidPicture(req.files.mainPicture)) {
       errorMessage = "Main Image Is Not Valid";
@@ -56,7 +65,9 @@ class productController {
       mainPicture: images.mainPicture.url,
       secondPicture: images.secondPicture.url,
       thirdPicture: images.thirdPicture.url,
-      fourthPicture: images.fourthPicture.url
+      fourthPicture: images.fourthPicture.url,
+      discountPercent: discountPercent,
+      discountDeadline: discountDeadline,
     });
     product.save();
     req.flash("success", "Product Created");
@@ -66,7 +77,7 @@ class productController {
   static async getAllProducts(req, res) {
     const products = await Product.find().populate("category");
     res.render(`${baseUrl}/view-all-products`, {
-      products: products
+      products: products,
     });
   }
 
@@ -81,7 +92,7 @@ const sendErrorMessage = async (res, message, fields, route) => {
   return res.render(`${baseUrl}${route}`, {
     previousInput: fields,
     error: message,
-    categories: categories
+    categories: categories,
   });
 };
 

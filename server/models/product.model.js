@@ -32,6 +32,8 @@ const productSchema = new Schema({
   fourthPicture: {
     type: String,
   },
+  discountPercent: Number,
+  discountDeadline: Date,
   category: {
     type: Schema.Types.ObjectId,
     ref: "Category",
@@ -45,7 +47,7 @@ const productSchema = new Schema({
     type: Number,
     default: 0,
   },
-  createOn: {
+  createdOn: {
     type: Date,
     default: Date.now,
   },

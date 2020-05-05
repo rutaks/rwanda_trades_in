@@ -104,7 +104,7 @@
                                                         class="text-wrapper d-flex align-items-center justify-content-between mb-2">
                                                         <p class="mb-0 text-dark">Total Accepted Requests</p>
                                                     </div>
-                                                    <h3 class="mb-0 text-dark font-weight-bold">5</h3>
+                                                    <h3 class="mb-0 text-dark font-weight-bold">_</h3>
                                                     <canvas id="total-profit"></canvas>
                                                 </div>
                                                 <div class="wrapper pt-5">
@@ -112,7 +112,7 @@
                                                         class="text-wrapper d-flex align-items-center justify-content-between mb-2">
                                                         <p class="mb-0 text-dark">Total Rejected Requests</p>
                                                     </div>
-                                                    <h3 class="mb-4 text-dark font-weight-bold">5</h3>
+                                                    <h3 class="mb-4 text-dark font-weight-bold">_</h3>
                                                     <canvas id="total-expences"></canvas>
                                                 </div>
                                             </div>
@@ -175,364 +175,430 @@
         <script>
             const charts = () => {
                 if ($("#device-sales").length) {
-                    var deviceSalesData = {
-                        labels: [
-                            "Iphone",
-                            "Google",
-                            "Sumsung",
-                            "Huawei",
-                            "Xiaomi",
-                            "Oppo",
-                            "Vivo",
-                            "Lg",
-                        ],
-                        datasets: [
-                            {
-                                label: "Accepted",
-                                data: [450, 500, 300, 350, 200, 320, 310, 700],
-                                backgroundColor: [
-                                    "#a461d8",
-                                    "#a461d8",
-                                    "#a461d8",
-                                    "#a461d8",
-                                    "#a461d8",
-                                    "#a461d8",
-                                    "#a461d8",
-                                    "#a461d8",
-                                ],
-                                borderColor: [
-                                    "#a461d8",
-                                    "#a461d8",
-                                    "#a461d8",
-                                    "#a461d8",
-                                    "#a461d8",
-                                    "#a461d8",
-                                    "#a461d8",
-                                    "#a461d8",
-                                ],
-                                borderWidth: 1,
-                                fill: false,
-                            },
-                            {
-                                label: "Rejected",
-                                data: [250, 100, 310, 75, 290, 100, 500, 260],
-                                backgroundColor: [
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                ],
-                                borderColor: [
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                    "#fc5a5a",
-                                ],
-                                borderWidth: 1,
-                                fill: false,
-                            },
-                        ],
-                    };
-                    var deviceSalesOptions = {
-                        scales: {
-                            xAxes: [
-                                {
-                                    stacked: false,
-                                    barPercentage: 0.5,
-                                    categoryPercentage: 0.4,
-                                    position: "bottom",
-                                    display: true,
-                                    gridLines: {
-                                        display: false,
-                                        drawBorder: false,
-                                        drawTicks: false,
+                    let xhr = new XMLHttpRequest();
+                    xhr.responseType = 'json';
+                    xhr.open('GET', '/api/product-requests/accepted');
+                    xhr.send();
+                    xhr.onload = function () {
+                        if (xhr.status != 200) { // analyze HTTP status of the response
+                            alert(`Error Could Not Request History`); // e.g. 404: Not Found
+                            console.log(xhr.status)
+                        } else {
+                            const { requests } = xhr.response.payload;
+                            const products = requests.map(r => r.name);
+                            console.log(products)
+                            const successReq = requests.map(r => r.successfulRequests);
+                            const rejectedReq = requests.map(r => r.rejectedRequests);
+                            var deviceSalesData = {
+                                labels: products,
+                                datasets: [
+                                    {
+                                        label: "Accepted",
+                                        data: successReq,
+                                        backgroundColor: [
+                                            "#a461d8",
+                                            "#a461d8",
+                                            "#a461d8",
+                                            "#a461d8",
+                                            "#a461d8",
+                                        ],
+                                        borderColor: [
+                                            "#a461d8",
+                                            "#a461d8",
+                                            "#a461d8",
+                                            "#a461d8",
+                                            "#a461d8",
+                                        ],
+                                        borderWidth: 1,
+                                        fill: false,
                                     },
-                                    ticks: {
-                                        display: true, //this will remove only the label
-                                        stepSize: 500,
-                                        fontColor: "#a7afb7",
-                                        fontSize: 14,
-                                        padding: 10,
+                                    {
+                                        label: "Rejected",
+                                        data: rejectedReq,
+                                        backgroundColor: [
+                                            "#fc5a5a",
+                                            "#fc5a5a",
+                                            "#fc5a5a",
+                                            "#fc5a5a",
+                                            "#fc5a5a",
+                                        ],
+                                        borderColor: [
+                                            "#fc5a5a",
+                                            "#fc5a5a",
+                                            "#fc5a5a",
+                                            "#fc5a5a",
+                                            "#fc5a5a",
+                                        ],
+                                        borderWidth: 1,
+                                        fill: false,
                                     },
-                                },
-                            ],
-                            yAxes: [
-                                {
-                                    stacked: false,
-                                    display: true,
-                                    gridLines: {
-                                        drawBorder: false,
-                                        display: true,
-                                        color: "#eef0fa",
-                                        drawTicks: false,
-                                        zeroLineColor: "rgba(90, 113, 208, 0)",
-                                    },
-                                    ticks: {
-                                        display: true,
-                                        beginAtZero: true,
-                                        stepSize: 200,
-                                        fontColor: "#a7afb7",
-                                        fontSize: 14,
-                                        callback: function (value, index, values) {
-                                            return value + "k";
+                                ],
+                            };
+                            var deviceSalesOptions = {
+                                scales: {
+                                    xAxes: [
+                                        {
+                                            stacked: false,
+                                            barPercentage: 0.5,
+                                            categoryPercentage: 0.4,
+                                            position: "bottom",
+                                            display: true,
+                                            gridLines: {
+                                                display: false,
+                                                drawBorder: false,
+                                                drawTicks: false,
+                                            },
+                                            ticks: {
+                                                display: true, //this will remove only the label
+                                                stepSize: 500,
+                                                fontColor: "#a7afb7",
+                                                fontSize: 14,
+                                                padding: 10,
+                                            },
                                         },
+                                    ],
+                                    yAxes: [
+                                        {
+                                            stacked: false,
+                                            display: true,
+                                            gridLines: {
+                                                drawBorder: false,
+                                                display: true,
+                                                color: "#eef0fa",
+                                                drawTicks: false,
+                                                zeroLineColor: "rgba(90, 113, 208, 0)",
+                                            },
+                                            ticks: {
+                                                display: true,
+                                                beginAtZero: true,
+                                                stepSize: 200,
+                                                fontColor: "#a7afb7",
+                                                fontSize: 14,
+                                                callback: function (value, index, values) {
+                                                    return value + "k";
+                                                },
+                                            },
+                                        },
+                                    ],
+                                },
+                                legend: {
+                                    display: false,
+                                },
+                                legendCallback: function (chart) {
+                                    var text = [];
+                                    text.push('<ul class="' + chart.id + '-legend">');
+                                    for (var i = 0; i < chart.data.datasets.length; i++) {
+                                        text.push(
+                                            '<li><span class="legend-box" style="background:' +
+                                            chart.data.datasets[i].backgroundColor[i] +
+                                            ';"></span><span class="legend-label text-dark">'
+                                        );
+                                        if (chart.data.datasets[i].label) {
+                                            text.push(chart.data.datasets[i].label);
+                                        }
+                                        text.push("</span></li>");
+                                    }
+                                    text.push("</ul>");
+                                    return text.join("");
+                                },
+                                tooltips: {
+                                    backgroundColor: "rgba(0, 0, 0, 1)",
+                                },
+                                plugins: {
+                                    datalabels: {
+                                        display: false,
+                                        align: "center",
+                                        anchor: "center",
                                     },
                                 },
-                            ],
-                        },
-                        legend: {
-                            display: false,
-                        },
-                        legendCallback: function (chart) {
-                            var text = [];
-                            text.push('<ul class="' + chart.id + '-legend">');
-                            for (var i = 0; i < chart.data.datasets.length; i++) {
-                                text.push(
-                                    '<li><span class="legend-box" style="background:' +
-                                    chart.data.datasets[i].backgroundColor[i] +
-                                    ';"></span><span class="legend-label text-dark">'
-                                );
-                                if (chart.data.datasets[i].label) {
-                                    text.push(chart.data.datasets[i].label);
-                                }
-                                text.push("</span></li>");
-                            }
-                            text.push("</ul>");
-                            return text.join("");
-                        },
-                        tooltips: {
-                            backgroundColor: "rgba(0, 0, 0, 1)",
-                        },
-                        plugins: {
-                            datalabels: {
-                                display: false,
-                                align: "center",
-                                anchor: "center",
-                            },
-                        },
-                    };
-                    var barChartCanvas = $("#device-sales").get(0).getContext("2d");
-                    // This will get the first returned node in the jQuery collection.
-                    var barChart = new Chart(barChartCanvas, {
-                        type: "bar",
-                        data: deviceSalesData,
-                        options: deviceSalesOptions,
-                    });
-                    document.getElementById(
-                        "device-sales-legend"
-                    ).innerHTML = barChart.generateLegend();
+                            };
+                            var barChartCanvas = $("#device-sales").get(0).getContext("2d");
+                            // This will get the first returned node in the jQuery collection.
+                            var barChart = new Chart(barChartCanvas, {
+                                type: "bar",
+                                data: deviceSalesData,
+                                options: deviceSalesOptions,
+                            });
+                            document.getElementById(
+                                "device-sales-legend"
+                            ).innerHTML = barChart.generateLegend();
+                        }
+                    }
                 }
                 if ($("#account-retension").length) {
-                    var accountRetensionData = {
-                        labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-                        datasets: [
-                            {
-                                label: "Demand",
-                                data: [33, 48, 39, 36, 36],
-                                backgroundColor: [
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                ],
-                                borderColor: [
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                ],
-                                borderWidth: 1,
-                                fill: false,
-                            },
-                            {
-                                label: "Demand",
-                                data: [94, 28, 49, 25, 20],
-                                backgroundColor: [
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                ],
-                                borderColor: [
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                ],
-                                borderWidth: 1,
-                                fill: false,
-                            },
-                            {
-                                label: "Demand",
-                                data: [66, 33, 25, 36, 69],
-                                backgroundColor: [
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                ],
-                                borderColor: [
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                    "#d8d8d8",
-                                ],
-                                borderWidth: 1,
-                                fill: false,
-                            },
-                        ],
-                    };
-                    var accountRetensionOptions = {
-                        scales: {
-                            xAxes: [
-                                {
-                                    stacked: false,
-                                    position: "bottom",
-                                    display: true,
-                                    barPercentage: 0.7,
-                                    categoryPercentage: 1,
-                                    gridLines: {
-                                        display: false,
-                                        drawBorder: false,
-                                        drawTicks: false,
+                    let xhr = new XMLHttpRequest();
+                    xhr.responseType = 'json';
+                    xhr.open('GET', '/api/product-requests/requests/total/by-month');
+                    xhr.send();
+                    xhr.onload = function () {
+                        if (xhr.status != 200) { // analyze HTTP status of the response
+                            alert(`Error Could Not Request History`); // e.g. 404: Not Found
+                        } else { // show the result
+                            const { dates } = xhr.response.payload;
+                            const months = dates.map(d => d.month);
+                            const value = dates.map(d => d.total);
+                            var accountRetensionData = {
+                                labels: months,
+                                datasets: [
+                                    {
+                                        label: "Requests",
+                                        data: value,
+                                        backgroundColor: [
+                                            "#d8d8d8",
+                                            "#d8d8d8",
+                                            "#d8d8d8",
+                                            "#d8d8d8",
+                                            "#d8d8d8",
+                                        ],
+                                        borderColor: [
+                                            "#d8d8d8",
+                                            "#d8d8d8",
+                                            "#d8d8d8",
+                                            "#d8d8d8",
+                                            "#d8d8d8",
+                                        ],
+                                        borderWidth: 1,
+                                        fill: false,
                                     },
-                                    ticks: {
-                                        display: true, //this will remove only the label
-                                        stepSize: 500,
-                                        fontColor: "#a7afb7",
-                                        fontSize: 14,
-                                        padding: 10,
-                                    },
-                                },
-                            ],
-                            yAxes: [
-                                {
-                                    stacked: false,
-                                    display: true,
-                                    gridLines: {
-                                        drawBorder: false,
-                                        display: true,
-                                        color: "#c31a56",
-                                        drawTicks: false,
-                                        zeroLineColor: "rgba(90, 113, 208, 0)",
-                                    },
-                                    ticks: {
-                                        display: false,
-                                        beginAtZero: true,
-                                        stepSize: 40,
-                                        fontColor: "#a7afb7",
-                                        fontSize: 14,
-                                        callback: function (value, index, values) {
-                                            return value + "k";
+
+                                ],
+                            };
+                            var accountRetensionOptions = {
+                                scales: {
+                                    xAxes: [
+                                        {
+                                            stacked: false,
+                                            position: "bottom",
+                                            display: true,
+                                            barPercentage: 0.7,
+                                            categoryPercentage: 1,
+                                            gridLines: {
+                                                display: false,
+                                                drawBorder: false,
+                                                drawTicks: false,
+                                            },
+                                            ticks: {
+                                                display: true, //this will remove only the label
+                                                stepSize: 500,
+                                                fontColor: "#a7afb7",
+                                                fontSize: 14,
+                                                padding: 10,
+                                            },
                                         },
+                                    ],
+                                    yAxes: [
+                                        {
+                                            stacked: false,
+                                            display: true,
+                                            gridLines: {
+                                                drawBorder: false,
+                                                display: true,
+                                                color: "#c31a56",
+                                                drawTicks: false,
+                                                zeroLineColor: "rgba(90, 113, 208, 0)",
+                                            },
+                                            ticks: {
+                                                display: false,
+                                                beginAtZero: true,
+                                                stepSize: 40,
+                                                fontColor: "#a7afb7",
+                                                fontSize: 14,
+                                                callback: function (value, index, values) {
+                                                    return value + "k";
+                                                },
+                                            },
+                                        },
+                                    ],
+                                },
+                                legend: {
+                                    display: false,
+                                },
+                                tooltips: {
+                                    backgroundColor: "rgba(0, 0, 0, 1)",
+                                },
+                                plugins: {
+                                    datalabels: {
+                                        display: false,
+                                        align: "center",
+                                        anchor: "center",
                                     },
                                 },
-                            ],
-                        },
-                        legend: {
-                            display: false,
-                        },
-                        tooltips: {
-                            backgroundColor: "rgba(0, 0, 0, 1)",
-                        },
-                        plugins: {
-                            datalabels: {
-                                display: false,
-                                align: "center",
-                                anchor: "center",
-                            },
-                        },
+                            };
+                            var barChartCanvas = $("#account-retension").get(0).getContext("2d");
+                            // This will get the first returned node in the jQuery collection.
+                            var barChart = new Chart(barChartCanvas, {
+                                type: "bar",
+                                data: accountRetensionData,
+                                options: accountRetensionOptions,
+                            });
+                        }
                     };
-                    var barChartCanvas = $("#account-retension").get(0).getContext("2d");
-                    // This will get the first returned node in the jQuery collection.
-                    var barChart = new Chart(barChartCanvas, {
-                        type: "bar",
-                        data: accountRetensionData,
-                        options: accountRetensionOptions,
-                    });
                 }
                 if ($("#total-expences").length) {
-                    var totalExpencesData = {
-                        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
-                        datasets: [
-                            {
-                                label: "Margin",
-                                data: [4, 5, 6, 5, 4, 5, 4, 6, 5],
-                                backgroundColor: ["#ff7896"],
-                                borderColor: ["#a8324c"],
-                                borderWidth: 3,
-                                fill: true,
-                            },
-                        ],
-                    };
-                    var totalExpencesOptions = {
-                        scales: {
-                            yAxes: [
-                                {
-                                    display: false,
-                                    gridLines: {
-                                        drawBorder: false,
-                                        display: false,
-                                        drawTicks: false,
+                    let xhr = new XMLHttpRequest();
+                    xhr.responseType = 'json';
+                    xhr.open('GET', '/api/product-requests/requests/total/by-month');
+                    xhr.send();
+                    xhr.onload = function () {
+                        if (xhr.status != 200) { // analyze HTTP status of the response
+                            alert(`Error Could Not Request History`); // e.g. 404: Not Found
+                        } else { // show the result
+                            const { dates } = xhr.response.payload;
+                            const months = dates.map(d => d.month);
+                            const value = dates.map(d => d.total);
+                            var totalExpencesData = {
+                                labels: months,
+                                datasets: [
+                                    {
+                                        label: "Margin",
+                                        data: value,
+                                        backgroundColor: ["#ff7896"],
+                                        borderColor: ["#a8324c"],
+                                        borderWidth: 3,
+                                        fill: true,
                                     },
-                                    ticks: {
-                                        beginAtZero: true,
-                                        stepSize: 10,
+                                ],
+                            };
+                            var totalExpencesOptions = {
+                                scales: {
+                                    yAxes: [
+                                        {
+                                            display: false,
+                                            gridLines: {
+                                                drawBorder: false,
+                                                display: false,
+                                                drawTicks: false,
+                                            },
+                                            ticks: {
+                                                beginAtZero: true,
+                                                stepSize: 10,
+                                            },
+                                        },
+                                    ],
+                                    xAxes: [
+                                        {
+                                            display: false,
+                                            position: "bottom",
+                                            gridLines: {
+                                                drawBorder: false,
+                                                display: false,
+                                                drawTicks: false,
+                                            },
+                                            ticks: {
+                                                beginAtZero: true,
+                                                stepSize: 10,
+                                            },
+                                        },
+                                    ],
+                                },
+                                legend: {
+                                    display: false,
+                                },
+                                elements: {
+                                    point: {
+                                        radius: 0,
+                                    },
+                                    line: {
+                                        tension: 0,
                                     },
                                 },
-                            ],
-                            xAxes: [
-                                {
-                                    display: false,
-                                    position: "bottom",
-                                    gridLines: {
-                                        drawBorder: false,
-                                        display: false,
-                                        drawTicks: false,
+                                tooltips: {
+                                    backgroundColor: "rgba(2, 171, 254, 1)",
+                                },
+                            };
+                            var barChartCanvas = $("#total-expences").get(0).getContext("2d");
+                            // This will get the first returned node in the jQuery collection.
+                            var barChart = new Chart(barChartCanvas, {
+                                type: "line",
+                                data: totalExpencesData,
+                                options: totalExpencesOptions,
+                            });
+                        }
+                    }
+
+                }
+                if ($("#total-profit").length) {
+                    let xhr = new XMLHttpRequest();
+                    xhr.responseType = 'json';
+                    xhr.open('GET', '/api/product-requests/requests/total/by-month');
+                    xhr.send();
+                    xhr.onload = function () {
+                        if (xhr.status != 200) { // analyze HTTP status of the response
+                            alert(`Error Could Not Request History`); // e.g. 404: Not Found
+                        } else { // show the result
+                            const { dates } = xhr.response.payload;
+                            const months = dates.map(d => d.month);
+                            const value = dates.map(d => d.total);
+                            var totalProfitData = {
+                                labels: months,
+                                datasets: [
+                                    {
+                                        label: "Margin",
+                                        data: value,
+                                        backgroundColor: ["#cfe1ff"],
+                                        borderColor: ["#0062ff"],
+                                        borderWidth: 3,
+                                        fill: true,
                                     },
-                                    ticks: {
-                                        beginAtZero: true,
-                                        stepSize: 10,
+                                ],
+                            };
+                            var totalProfitOptions = {
+                                scales: {
+                                    yAxes: [
+                                        {
+                                            display: false,
+                                            gridLines: {
+                                                drawBorder: false,
+                                                display: false,
+                                                drawTicks: false,
+                                            },
+                                            ticks: {
+                                                beginAtZero: true,
+                                                stepSize: 10,
+                                            },
+                                        },
+                                    ],
+                                    xAxes: [
+                                        {
+                                            display: false,
+                                            position: "bottom",
+                                            gridLines: {
+                                                drawBorder: false,
+                                                display: false,
+                                                drawTicks: false,
+                                            },
+                                            ticks: {
+                                                beginAtZero: true,
+                                                stepSize: 10,
+                                            },
+                                        },
+                                    ],
+                                },
+                                legend: {
+                                    display: false,
+                                },
+                                elements: {
+                                    point: {
+                                        radius: 0,
+                                    },
+                                    line: {
+                                        tension: 0,
                                     },
                                 },
-                            ],
-                        },
-                        legend: {
-                            display: false,
-                        },
-                        elements: {
-                            point: {
-                                radius: 0,
-                            },
-                            line: {
-                                tension: 0,
-                            },
-                        },
-                        tooltips: {
-                            backgroundColor: "rgba(2, 171, 254, 1)",
-                        },
-                    };
-                    var barChartCanvas = $("#total-expences").get(0).getContext("2d");
-                    // This will get the first returned node in the jQuery collection.
-                    var barChart = new Chart(barChartCanvas, {
-                        type: "line",
-                        data: totalExpencesData,
-                        options: totalExpencesOptions,
-                    });
+                                tooltips: {
+                                    backgroundColor: "rgba(2, 171, 254, 1)",
+                                },
+                            };
+                            var barChartCanvas = $("#total-profit").get(0).getContext("2d");
+                            // This will get the first returned node in the jQuery collection.
+                            var barChart = new Chart(barChartCanvas, {
+                                type: "line",
+                                data: totalProfitData,
+                                options: totalProfitOptions,
+                            });
+                        }
+                    }
+
                 }
             }
             charts();

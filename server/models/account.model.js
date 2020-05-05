@@ -5,28 +5,28 @@ const Schema = mongoose.Schema;
 const accountSchema = new Schema({
   username: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
-    type: String
+    type: String,
   },
   owner: {
     type: Schema.Types.ObjectId,
     ref: "Admin",
-    required: true
+    required: true,
   },
-  createOn: {
+  createdOn: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   resetPasswordToken: {
     type: String,
-    required: false
+    required: false,
   },
   resetPasswordExpires: {
     type: Date,
-    required: false
-  }
+    required: false,
+  },
 });
 
 export default mongoose.model("Account", accountSchema);

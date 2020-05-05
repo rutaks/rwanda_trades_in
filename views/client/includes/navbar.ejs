@@ -39,14 +39,15 @@
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-5">
-                        <div class="advanced-search">
-                            <span class="category-btn">Search</span>
-                            <div class="input-group">
-                                <input type="text" placeholder="What do you need?">
-                                <button type="button"><i class="ti-search"></i></button>
+                        <form action="/products/search" method="post">
+                            <div class="advanced-search">
+                                <span class="category-btn">Search</span>
+                                <div class="input-group">
+                                    <input type="text" name="searchQuery" placeholder="What do you need?">
+                                    <button type="sumbit"><i class="ti-search"></i></button>
+                                </div>
                             </div>
-                        </div>
-
+                        </form>
                     </div>
                     <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
@@ -79,9 +80,9 @@
                 </div>
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/">Home</a></li>
 
-                        <li><a href="./contact.html">Contact</a></li>
+                        <li><a href="/contact-us">Contact</a></li>
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap"></div>

@@ -1,6 +1,11 @@
 <%- include('../../includes/header.ejs') %>
 <%- include('../../includes/navbar.ejs') %>
 <div class="main-panel">
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
     <div class="content-wrapper">
         <div class="page-header">
             <nav aria-label="breadcrumb">
@@ -55,6 +60,22 @@
                                         <label>Price</label>
                                         <input type="number" class="form-control" name="price"
                                             value="<%= typeof previousInput != 'undefined'? previousInput.price: '' %>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <div class="form-group">
+                                        <label>Discount %</label>
+                                        <input type="number" class="form-control" name="discountPercent"
+                                            value="<%= typeof previousInput != 'undefined'? previousInput.discountPercent: '' %>">
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="form-group">
+                                        <label>Dealine</label>
+                                        <input type="date" class="form-control" name="discountDeadline"
+                                            value="<%= typeof previousInput != 'undefined'? previousInput.discountDeadline: '' %>">
                                     </div>
                                 </div>
                             </div>

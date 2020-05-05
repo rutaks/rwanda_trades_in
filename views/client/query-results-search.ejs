@@ -29,13 +29,12 @@
 
                         </div>
                         <div class="col-lg-5 col-md-5 text-right">
-                            <p><%= numOfResults %> Product(s)</p>
+                            <p>Page <%= currentPage %> Of <%= numOfResults %> Product</p>
                         </div>
                     </div>
                 </div>
                 <div class="product-list">
                     <div class="row">
-                        <%if(typeof products !== "undefined"){%>
                         <% for(let product of products){  %>
                         <div class="col-lg-4 col-sm-6">
                             <div class="product-item">
@@ -46,8 +45,9 @@
                                         <i class="icon_heart_alt"></i>
                                     </div>
                                     <ul>
-                                        <li class="quick-view"><a href="/products/<%=product._id%>">+ Quick View</a>
-                                        </li>
+                                        <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                        <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                        <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="pi-text">
@@ -63,23 +63,22 @@
                             </div>
                         </div>
                         <% }  %>
-                        <% } %>
                     </div>
                 </div>
                 <!-- PAGINATION -->
                 <center>
                     <div class="pagination">
                         <% if (currentPage !== 1 && currentPage <= pages) { %>
-                        <a href="/categories/<%= categoryId %>/<%= parseInt(currentPage) - 1 %>">
+                        <a href="/search/<%= searchQuery %>/<%= parseInt(currentPage) - 1 %>">
                             &laquo;
                         </a>
                         <%}%>
                         <% for (var i = 1; i <= currentPage;  i++ ) { %>
-                        <a href="/categories/<%= categoryId %>/<%= i %>" <% if(currentPage == i) {%>class="active"
+                        <a href="/search/<%= searchQuery %>/<%= i %>" <% if(currentPage == i) {%>class="active"
                             <% } %>><%= i %></a>
                         <% } %>
                         <% if ( pages > 1 && currentPage !== pages) { %>
-                        <a href="/categories/<%= categoryId %>/<%= parseInt(currentPage) + 1 %>">
+                        <a href="/search/<%= searchQuery %>/<%= parseInt(currentPage) + 1 %>">
                             &raquo;
                         </a>
                         <% } %>
