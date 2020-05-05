@@ -52,6 +52,8 @@ class Validator {
       currency: Joi.string().valid("USD", "UAE", "RWF").required(),
       description: Joi.string().required(),
       category: Joi.string().required(),
+      discountPercent: Joi.number().allow(""),
+      discountDeadline: Joi.date().greater(new Date()).allow(""),
     });
     return productSchema.validate(product);
   }
