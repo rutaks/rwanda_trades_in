@@ -31,7 +31,7 @@
                                     <th> Product Name </th>
                                     <th> Category </th>
                                     <th> Price </th>
-                                    <th> Operations </th>
+                                    <!-- <th> Operations </th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,10 +40,13 @@
                             <td> <%=key+1 %> </td>
                             <td><img src="<%=product.mainPicture%>" alt="<%=product.name%>"></td>
                             <td><%=product.name%></td>
-                            <td> <%=product.category.name%> %>
-                            </td>
+                            <%if(product.category !== null){%>
+                            <td><%=product.category.name%></td>
+                            <%} else {%>
+                            <td style="color: red;">Category was deleted</td>
+                            <%}%>
                             <td> <%=product.price%> <%=product.currency%> </td>
-                            <td>
+                            <!-- <td>
                                 <a class="badge badge-warning" href="/admin/categories/modify/<%=product._id%>">
                                     <i class="mdi mdi-book-open-page-variant"></i>
                                 </a>
@@ -51,7 +54,7 @@
                                     <i class="mdi mdi-block-helper"></i>
                                 </a>
                                 <br><br>
-                            </td>
+                            </td> -->
                         </tr>
                         <% }) %>
                         </tbody>

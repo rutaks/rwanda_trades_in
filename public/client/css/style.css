@@ -1686,20 +1686,16 @@ ol {
   color: #181818;
 }
 
-.dark {
+.copyright-reserved .copyright-text a {
   color: #181818;
 }
 
-.copyright-reserved .copyright-text a {
-  color: #b2b2b2;
-}
-
 .copyright-reserved .copyright-text i {
-  color: #cc2424;
+  color: #181818;
 }
 
 .copyright-reserved .copyright-text a:hover {
-  color: #e7ab3c;
+  color: #181818;
 }
 
 .copyright-reserved .payment-pic {

@@ -95,6 +95,7 @@
                     </ul>
                 </div>
                 <div class="product-slider owl-carousel">
+                    <%if(typeof womenProducts !== 'undefined' && womenProducts !== null){%>
                     <% for(let womenProduct of womenProducts){  %>
                     <div class="product-item">
                         <div class="pi-pic">
@@ -120,6 +121,7 @@
                         </div>
                     </div>
                     <% } %>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -142,6 +144,7 @@
                     </ul>
                 </div>
                 <div class="product-slider owl-carousel">
+                    <%if(typeof menProducts !== 'undefined' && menProducts !== null){%>
                     <% for(let menProduct of menProducts){  %>
                     <div class="product-item">
                         <div class="pi-pic">
@@ -165,6 +168,7 @@
                             </div>
                         </div>
                     </div>
+                    <% } %>
                     <% } %>
                 </div>
             </div>

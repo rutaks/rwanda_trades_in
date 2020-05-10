@@ -1,0 +1,23 @@
+div .dark {
+  color: #181818;
+}
+
+a .dark {
+  color: #181818;
+}
+
+a:active .dark {
+  color: #181818;
+}
+
+a:link .dark {
+  color: #181818;
+}
+
+a:visited .dark {
+  color: #181818;
+}
+
+a:hover .dark {
+  color: #181818;
+}

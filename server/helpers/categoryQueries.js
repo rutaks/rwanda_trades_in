@@ -9,12 +9,18 @@ class CategoryQueries {
   static async getHomePageComponents() {
     const menCategory = await Category.findOne({ name: "Men's Clothes" });
     const womenCategory = await Category.findOne({ name: "Women's Clothes" });
-    const menProducts = await Product.find({ category: menCategory.id })
-      .populate("category")
-      .limit(10);
-    const womenProducts = await Product.find({ category: womenCategory.id })
-      .populate("category")
-      .limit(10);
+    let menProducts = [];
+    let womenProducts = [];
+    if (menCategory !== null) {
+      menProducts = await Product.find({ category: menCategory.id })
+        .populate("category")
+        .limit(10);
+    }
+    if (womenCategory !== null) {
+      womenProducts = await Product.find({ category: womenCategory.id })
+        .populate("category")
+        .limit(10);
+    }
     return { menProducts, womenProducts };
   }
 
