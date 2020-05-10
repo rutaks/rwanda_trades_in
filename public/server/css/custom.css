@@ -11,3 +11,21 @@
 ::placeholder {
   color: red;
 }
+
+.absolute-center-icon {
+  position: absolute;
+  top: 51%;
+  right: 0;
+  left: 0;
+  margin: auto;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  display: block;
+}
+
+@media (max-width: 1200px) {
+  .absolute-center-icon {
+    top: 64%;
+  }
+}
