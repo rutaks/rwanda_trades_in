@@ -36,10 +36,11 @@
                 <div class="product-list">
                     <div class="row">
                         <% for(let product of products){  %>
-                        <div class="col-lg-4 col-sm-6">
+                        <!-- <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"> -->
+                        <div class="col-5 col-xs-3 col-sm-3 col-md-3 col-lg-4">
                             <div class="product-item">
                                 <div class="pi-pic">
-                                    <img style="height: 300px;" src="<%=product.mainPicture%>" alt="">
+                                    <img class="responsive" src="<%=product.mainPicture%>" alt="">
                                     <!-- <div class="sale pp-sale">Sale</div> -->
                                     <div class="icon">
                                         <i class="icon_heart_alt"></i>

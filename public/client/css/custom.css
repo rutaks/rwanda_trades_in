@@ -21,3 +21,8 @@ a:visited .dark {
 a:hover .dark {
   color: #181818;
 }
+
+.responsive {
+  width: 100%;
+  height: auto;
+}
