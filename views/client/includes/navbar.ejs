@@ -59,30 +59,18 @@
         </div>
         <div class="nav-item">
             <div class="container">
-
                 <nav class="nav-menu mobile-menu">
                     <ul>
+                        <li><a href="#">All Departments</a>
+                            <ul class="dropdown">
+                                <% for(let category of categories){  %>
+                                <li><a href="/categories/<%=category._id%>"><%=category.name%></a></li>
+                                <% } %>
+                            </ul>
+                        </li>
                         <li><a href="/">Home</a></li>
-
                         <li><a href="/contact-us">Contact</a></li>
                     </ul>
-                    <div class="depart-btn">
-                        <i class="ti-menu"></i>
-                        <span>All departments</span>
-                        <ul class="depart-hover">
-                            <% for(let category of categories){  %>
-                            <li><a href="/categories/<%=category._id%>"><%=category.name%></a></li>
-                            <% } %>
-                            <!-- <li class="active"><a href="#">Women’s Clothing</a></li>
-                                                <li><a href="#">Men’s Clothing</a></li>
-                                                <li><a href="#">Underwear</a></li>
-                                                <li><a href="#">Kid's Clothing</a></li>
-                                                <li><a href="#">Brand Fashion</a></li>
-                                                <li><a href="#">Accessories/Shoes</a></li>
-                                                <li><a href="#">Luxury Brands</a></li>
-                                                <li><a href="#">Brand Outdoor Apparel</a></li> -->
-                        </ul>
-                    </div>
                 </nav>
                 <div id="mobile-menu-wrap"></div>
             </div>
