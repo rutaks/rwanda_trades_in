@@ -26,10 +26,10 @@
                 <div class="product-show-option">
                     <div class="row">
                         <div class="col-lg-7 col-md-7">
-
+                            <p>Page <%= currentPage %> of <%= pages %> </p>
                         </div>
                         <div class="col-lg-5 col-md-5 text-right">
-                            <p>Page <%= currentPage %> Of <%= numOfResults %> Product</p>
+                            <p><%= numOfResults %> Product(s)</p>
                         </div>
                     </div>
                 </div>
@@ -46,9 +46,7 @@
                                         <i class="icon_heart_alt"></i>
                                     </div>
                                     <ul>
-                                        <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                        <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                        <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                                        <li class="quick-view"><a href="/products/<%=product._id%>">+ Quick View</a>
                                     </ul>
                                 </div>
                                 <div class="pi-text">
@@ -68,20 +66,22 @@
                 </div>
                 <!-- PAGINATION -->
                 <center>
+                    <%if(typeof products !=="undefined" && products.length > 0){%>
                     <div class="pagination">
                         <% if (currentPage !== 1 && currentPage <= pages) { %>
-                        <a href="/search/<%= searchQuery %>/<%= parseInt(currentPage) - 1 %>">
+                        <a href="/categories/<%= categoryId %>/<%= parseInt(currentPage) - 1 %>">
                             &laquo;
                         </a>
                         <%}%>
-                        <% for (var i = 1; i <= currentPage;  i++ ) { %>
-                        <a href="/search/<%= searchQuery %>/<%= i %>" <% if(currentPage == i) {%>class="active"
+                                        <% for (var i = 1; i <= currentPage;  i++ ) { %>
+                        <a href="/categories/<%= categoryId %>/<%= i %>" <% if(currentPage == i) {%>class="active"
                             <% } %>><%= i %></a>
                         <% } %>
                         <% if ( pages > 1 && currentPage !== pages) { %>
-                        <a href="/search/<%= searchQuery %>/<%= parseInt(currentPage) + 1 %>">
+                        <a href="/categories/<%= categoryId %>/<%= parseInt(currentPage) + 1 %>">
                             &raquo;
                         </a>
+                        <% } %>
                         <% } %>
                     </div>
                 </center>
