@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/client/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="/client/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/client/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/client/css/custom.css" type="text/css">
 
     <!-- PRODUCT ITEM SAMPLE -->
     <!-- animate CSS -->
@@ -74,20 +75,21 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4">
                         <div class="logo">
-                            <a href="./index.html">
+                            <a href="/">
                                 <img src="/client/img/logo.png" alt="">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-5">
-                        <div class="advanced-search">
-                            <span class="category-btn">Search</span>
-                            <div class="input-group">
-                                <input type="text" placeholder="What do you need?">
-                                <button type="button"><i class="ti-search"></i></button>
+                        <form action="/products/search" method="post">
+                            <div class="advanced-search">
+                                <span class="category-btn">Search</span>
+                                <div class="input-group">
+                                    <input type="text" name="searchQuery" placeholder="What do you need?">
+                                    <button type="sumbit"><i class="ti-search"></i></button>
+                                </div>
                             </div>
-                        </div>
-
+                        </form>
                     </div>
                     <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
@@ -97,35 +99,48 @@
                 </div>
             </div>
         </div>
-        <div class="nav-item">
+
+        <div id="navbar" class="nav-item">
             <div class="container">
-                <div class="nav-depart">
-                    <div class="depart-btn">
-                        <i class="ti-menu"></i>
-                        <span>All departments</span>
-                        <ul class="depart-hover">
-                            <% for(let category of categories){  %>
-                            <li><a href="/categories/<%=category._id%>"><%=category.name%></a></li>
-                            <% } %>
-                            <!-- <li class="active"><a href="#">Women’s Clothing</a></li>
-                            <li><a href="#">Men’s Clothing</a></li>
-                            <li><a href="#">Underwear</a></li>
-                            <li><a href="#">Kid's Clothing</a></li>
-                            <li><a href="#">Brand Fashion</a></li>
-                            <li><a href="#">Accessories/Shoes</a></li>
-                            <li><a href="#">Luxury Brands</a></li>
-                            <li><a href="#">Brand Outdoor Apparel</a></li> -->
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <span class="navbar-brand" href="/"><img style="width: 80px;" src="/client/img/logo-no-text.png"
+                            alt=""></span>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Departments
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <% if(!categories || categories.length === 0){ %>
+                                    <a class="dropdown-item" href="#">No categories yet</a>
+                                    <% } else { %>
+                                    <% for(var i = 0; i < (categories.length > 10 ? 10 : categories.length); i++) {%>
+                                    <a class="dropdown-item"
+                                        href="/categories/<%=categories[i]._id%>"><%=categories[i].name%></a>
+                                    <% } %>
+                                    <% if(categories.length > 10){ %>
+                                    <a class="dropdown-item" href="/categories"> + See more categories</a>
+                                    <% } %>
+                                    <% } %>
+                                </div>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contact-us">Contact Us</a>
+                            </li>
                         </ul>
                     </div>
-                </div>
-                <nav class="nav-menu mobile-menu">
-                    <ul>
-                        <li class="active"><a href="/">Home</a></li>
-
-                        <li><a href="./contact.html">Contact</a></li>
-                    </ul>
                 </nav>
-                <div id="mobile-menu-wrap"></div>
             </div>
         </div>
     </header>
@@ -269,8 +284,11 @@
 
 
     <!-- product_list part start-->
+    <%if(typeof similarProducts !== 'undefined' && similarProducts.length > 0){%>
     <section class="product_list best_seller padding_bottom">
         <div class="container">
+            <hr>
+            <br>
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="section_tittle text-center">
@@ -300,10 +318,11 @@
                     </div>
                 </div>
                 <%}%>
-                <% }) %>
+                                <% }) %>
             </div>
         </div>
     </section>
+    <%}%>
     <!-- product_list part end-->
 
     <!-- Product Shop Section Begin -->
@@ -370,5 +389,6 @@
     <script src="/client/product_item/js/mail-script.js"></script>
     <!-- custom js -->
     <script src="/client/product_item/js/custom.js"></script>
+    <script src="/client/js/custom.js"></script>
     <!-- Product Shop Section End -->
     <%- include('./includes/footer.ejs') %>

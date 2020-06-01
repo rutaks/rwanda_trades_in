@@ -53,7 +53,7 @@ class productController {
         res,
         "Product's Name Is Already Taken",
         value,
-        "add-product"
+        "/add-product"
       );
     }
     const product = new Product({

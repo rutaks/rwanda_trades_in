@@ -1,12 +1,13 @@
 import { v2 as cloudinary } from "cloudinary";
 import env from "custom-env";
+import fs from "fs";
 
 env.env();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 class FileUtil {
@@ -16,8 +17,9 @@ class FileUtil {
       const uniqueFilename = `RWT_${date}_file`;
       const uploadedFile = await cloudinary.uploader.upload(file, {
         public_id: `${path}/${uniqueFilename}`,
-        tags: path
+        tags: path,
       });
+      fs.unlinkSync(file);
       return uploadedFile;
     } catch (error) {
       console.log("ERR:", `Could Not Upload File, ${error.message}`);
