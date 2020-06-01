@@ -6,7 +6,9 @@ class ProductQueries {
   }
 
   static async getProductsByCategoryId(categoryId, limit = 5) {
-    return await Product.find({ category: categoryId }).limit(limit);
+    return await Product.find({ category: categoryId })
+      .sort({ createdOn: "-1" })
+      .limit(limit);
   }
 
   static async getTotalProcucts() {
@@ -20,6 +22,7 @@ class ProductQueries {
         $options: "i",
       },
     })
+      .sort({ createdOn: "-1" })
       .skip(resPerPage * page - resPerPage)
       .limit(resPerPage);
     const count = await Product.count({
