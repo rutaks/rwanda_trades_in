@@ -1003,7 +1003,6 @@ ol {
 
 .single-banner {
   position: relative;
-  z-index: 1;
 }
 
 .single-banner:hover::before {

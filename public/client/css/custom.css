@@ -26,3 +26,42 @@ a:hover .dark {
   width: 100%;
   height: auto;
 }
+
+/* STICKY NAV BAR */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.sticky + .content {
+  padding-top: 5px;
+}
+#navbar a:hover {
+  background-color: #e6ab3c;
+  color: black;
+  transition: all 0.3s;
+}
+
+#navbar a.active {
+  background-color: #e6ab3c;
+  color: white;
+}
+
+.content {
+  z-index: -1;
+  position: relative;
+}
+
+.navbar-brand a:hover {
+  background-color: #252525;
+}
+
+.dropdown-menu {
+  background-color: #252525;
+}
+
+.dropdown-item {
+  color: #fff;
+}

@@ -57,36 +57,50 @@
                 </div>
             </div>
         </div>
-        <div class="nav-item">
+
+        <div id="navbar" class="nav-item">
             <div class="container">
-                <div class="nav-depart">
-                    <div class="depart-btn">
-                        <i class="ti-menu"></i>
-                        <span>All departments</span>
-                        <ul class="depart-hover">
-                            <% for(let category of categories){  %>
-                            <li><a href="/categories/<%=category._id%>"><%=category.name%></a></li>
-                            <% } %>
-                            <!-- <li class="active"><a href="#">Women’s Clothing</a></li>
-                            <li><a href="#">Men’s Clothing</a></li>
-                            <li><a href="#">Underwear</a></li>
-                            <li><a href="#">Kid's Clothing</a></li>
-                            <li><a href="#">Brand Fashion</a></li>
-                            <li><a href="#">Accessories/Shoes</a></li>
-                            <li><a href="#">Luxury Brands</a></li>
-                            <li><a href="#">Brand Outdoor Apparel</a></li> -->
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <span class="navbar-brand" href="#"><img style="width: 80px;" src="/client/img/logo-no-text.png"
+                            alt=""></span>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Departments
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <% if(!categories || categories.length === 0){ %>
+                                    <a class="dropdown-item" href="#">No categories yet</a>
+                                    <% } else { %>
+                                    <% for(var i = 0; i < (categories.length > 10 ? 10 : categories.length); i++) {%>
+                                    <a class="dropdown-item"
+                                        href="/categories/<%=categories[i]._id%>"><%=categories[i].name%></a>
+                                    <% } %>
+                                    <% if(categories.length > 10){ %>
+                                    <a class="dropdown-item" href="/categories"> + See more categories</a>
+                                    <% } %>
+                                    <% } %>
+                                </div>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contact-us">Contact Us</a>
+                            </li>
                         </ul>
                     </div>
-                </div>
-                <nav class="nav-menu mobile-menu">
-                    <ul>
-                        <li><a href="/">Home</a></li>
-
-                        <li><a href="/contact-us">Contact</a></li>
-                    </ul>
                 </nav>
-                <div id="mobile-menu-wrap"></div>
             </div>
         </div>
+
     </header>
     <!-- Header End -->
